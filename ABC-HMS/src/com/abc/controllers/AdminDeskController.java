@@ -103,6 +103,14 @@ public class AdminDeskController extends HttpServlet {
 			newPatient.setCity(city);
 			newPatient.setState(state);
 			newPatient.setType_of_room(type_of_room);
+			String patient_id =  AdminDeskService.createPatient(newPatient);
+			response.setContentType("text/plain");
+			if(patient_id!=null) {
+				response.getWriter().write(patient_id);
+			}else {
+				response.getWriter().write("failed");
+			}
+			
 			break;
 		case "updatePatient":
 			rd = request.getRequestDispatcher("admindeskJSPs/updatePatient.jsp");

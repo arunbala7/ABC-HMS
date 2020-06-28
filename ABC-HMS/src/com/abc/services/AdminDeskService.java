@@ -12,4 +12,13 @@ public class AdminDeskService {
 	
 	}
 
+
+	public static String createPatient(Patient newPatient) {
+		HospitalDAO dao = new HospitalDAO();
+		return dao.createPatient(newPatient);
+		
+		// TODO Auto-generated method stub
+		
+	}
+
 }
