@@ -53,8 +53,8 @@ public class AdminDeskController extends HttpServlet {
 			// pagination
 			int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			int recordsPerPage = 5;
-			List<Patient> customers = null;
-			customers = (List<Patient>) AdminDeskService.getPatients(currentPage, recordsPerPage);
+			List<Patient> patients = null;
+			patients = (List<Patient>) AdminDeskService.getPatients(currentPage, recordsPerPage);
 			
 			
 			
