@@ -54,4 +54,48 @@ public class HospitalDAO {
 		return patient_id;
 		
 	}
+
+	public Patient getPatient(Long patient_id) throws Exception {
+		Patient patient=null;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT * FROM patient WHERE `patient_id`= ?;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setLong(1, patient_id);
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()) {
+			patient=new Patient();
+			patient.setPatient_id(patient_id);
+			patient.setPatient_name(rs.getString(3));
+			patient.setPatient_age(rs.getInt(4));
+			patient.setPatient_date_of_admission(rs.getString(5));
+			patient.setType_of_room(rs.getString(6));
+			patient.setAddress(rs.getString(7));
+			patient.setCity(rs.getString(8));
+			patient.setState(rs.getString(9));			
+		}		
+		return patient;
+	}
+
+	public boolean updatePatient(Patient patient) throws Exception {
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "UPDATE patient SET patient_name = ?, patient_age=?, type_of_room=?,address =?, city=?, state=? WHERE patient_id = ?;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setString(1, patient.getPatient_name());
+		ps.setInt(2,patient.getPatient_age());
+		ps.setString(3, patient.getType_of_room());
+		ps.setString(4, patient.getAddress());
+		ps.setString(5, patient.getCity());
+		ps.setString(6, patient.getState());
+		ps.setLong(7, patient.getPatient_id());
+		int row = ps.executeUpdate();
+		if(row==1) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean deletePatient(Long patient_id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

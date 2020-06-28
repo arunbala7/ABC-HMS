@@ -175,11 +175,11 @@ $(document).ready(function() {
 				<div class="wrap-input100 validate-input m-b-23"
 					data-validate="Enter a Valid Age">
 					<span class="label-input100 ">Age</span> <input
-						class="input100 form-control" type="text" id="patient_age" name="patient_age" placeholder="Enter the age..."/>
+						class="input100 form-control" type="text" maxLength="3" id="patient_age" name="patient_age" placeholder="Enter the age..."/>
 					<span class="focus-input100"></span>
 				</div>
 				
-				<div class="wrap-input100 validate-input m-b-23 after-id"
+				<div class="wrap-input100 validate-input m-b-23"
 					data-validate="Select a valid room Type" id="div2">
 					<span class="label-input100 ">Type Of Room</span> <select id="type_of_room"
 						name="type_of_room" class="input100 form-control">

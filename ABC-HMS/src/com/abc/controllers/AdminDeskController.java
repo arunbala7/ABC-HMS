@@ -131,13 +131,14 @@ public class AdminDeskController extends HttpServlet {
 					}
 				} else {
 					Patient oldPatient = new Patient();
-					String patient_name = request.getParameter("patient_name");
+					String patient_name = (String)request.getParameter("patient_name");
 					int patient_age = Integer.parseInt(request.getParameter("patient_age"));
 					String address = (String) request.getParameter("address");
 					String city = (String) request.getParameter("city");
 					String state = (String) request.getParameter("state");
 					String type_of_room = (String) request.getParameter("type_of_room");
-
+					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
+					oldPatient.setPatient_id(patient_id);
 					oldPatient.setPatient_name(patient_name);
 					oldPatient.setPatient_age(patient_age);
 					oldPatient.setAddress(address);
