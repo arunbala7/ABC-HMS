@@ -48,21 +48,27 @@ $(document).ready(function() {
 			}
 			
 			if(check){
-			var name = "";
-			var ssn = "";
-			var dob = "";
+			var patient_name = "";
+			var patient_SSN= "";
+			var patient_age = "";
 			var address = "";
-			var action = "";
+			var city = "";
+			var state = "";
+			var type_of_room="";
+			var action="";
 			e.preventDefault();
-			name = $("#name").val();
-			ssn = $("#ssno").val();
-			dob = $("#dob").val();
+			patient_name = $("#patient_name").val();
+			patient_SSN = $("#patient_SSN").val();
+			patient_age = $("#patient_age").val();
 			address = $("#address").val();
-			action = $("#action").val();
-			var obj={name,ssn,dob,address,action };
+			city = $("#city").val();
+			state = $("#state").val();			
+			type_of_room = $("#type_of_room").val();			
+			action = $("#action").val();			
+			var obj={patient_name,patient_SSN,patient_age,address,city,state,type_of_room,action};
 			//alert(JSON.stringify(obj));			
 			$.ajax({
-	            url:'ExecutiveController',
+	            url:'AdminDeskController',
 	            data:obj,
 	            type:'post',
 	            cache:false,
@@ -79,7 +85,7 @@ $(document).ready(function() {
 	            		});
 	            	}else{
 	            		swal({
-		            		  title: "Customer Not Created, Duplication of Social Security Number!",
+		            		  title: "Patient Not Created, Duplication of Social Security Number!",
 		            		  text: "Try Again",
 		            		  icon: "error",
 		            		  button: "Okay",
@@ -206,7 +212,7 @@ $(document).ready(function() {
 				
 				
 				<input type="hidden" id="action" name="action"
-					value="createCustomer" />
+					value="createPatient" />
 				<div class="col-md-12 text-center">
 					<button type="reset" class="btn btn-primary active" id="reset">Reset</button>
 					&ensp; <input type="submit" class="btn btn-primary active"

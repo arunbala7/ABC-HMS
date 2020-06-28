@@ -13,7 +13,7 @@ public class AdminDeskService {
 	}
 
 
-	public static String createPatient(Patient newPatient) {
+	public static String createPatient(Patient newPatient) throws Exception {
 		HospitalDAO dao = new HospitalDAO();
 		return dao.createPatient(newPatient);
 		
