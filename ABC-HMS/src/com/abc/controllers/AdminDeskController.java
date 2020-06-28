@@ -30,7 +30,7 @@ public class AdminDeskController extends HttpServlet {
 			rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}
-		if (!currentUser.getWorkGroup().contentEquals("adminDesk")) {
+		if (currentUser!=null && !currentUser.getWorkGroup().contentEquals("adminDesk")) {
 			rd = request.getRequestDispatcher("Dashboard.jsp");
 			rd.forward(request, response);
 		}
