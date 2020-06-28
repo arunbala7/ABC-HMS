@@ -72,7 +72,9 @@ public class HospitalDAO {
 			patient.setAddress(rs.getString(7));
 			patient.setCity(rs.getString(8));
 			patient.setState(rs.getString(9));			
-		}		
+		}	
+		DBConnection.closeConnection();
+		ps.close();
 		return patient;
 	}
 
@@ -88,14 +90,25 @@ public class HospitalDAO {
 		ps.setString(6, patient.getState());
 		ps.setLong(7, patient.getPatient_id());
 		int row = ps.executeUpdate();
+		DBConnection.closeConnection();
+		ps.close();
 		if(row==1) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean deletePatient(Long patient_id) {
-		// TODO Auto-generated method stub
+	public boolean deletePatient(Long patient_id) throws Exception {
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "DELETE FROM patient WHERE patient_id = ?;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setLong(1, patient_id);
+		int row = ps.executeUpdate();
+		DBConnection.closeConnection();
+		ps.close();
+		if(row==1) {
+			return true;
+		}
 		return false;
 	}
 }

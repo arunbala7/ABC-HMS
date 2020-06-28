@@ -150,7 +150,8 @@ $(document).ready(function() {
 	});
 </script>
 </head>
-<body style="background-image: url('CSS and JS/images/other.jpg'); background-repeat: no-repeat;background-attachment: fixed; background-size: cover;">
+<body
+	style="background-image: url('CSS and JS/images/other.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
 	<%@ include file="../adminDeskHeader.jsp"%>
 	<div class="container-login100">
 		<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
@@ -161,58 +162,62 @@ $(document).ready(function() {
 				<div class="wrap-input100 validate-input m-b-23"
 					data-validate="Enter a Valid Name">
 					<span class="label-input100">Name</span> <input
-						class="input100 form-control" type="text" id="patient_name" name="patient_name"
-						placeholder="Enter the name..." /> <span class="focus-input100"></span>
+						class="input100 form-control" type="text" id="patient_name"
+						name="patient_name" placeholder="Enter the name..." /> <span
+						class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input m-b-23"
 					data-validate="Enter a Valid SSN">
 					<span class="label-input100" id="ssn">Social Security Number</span>
 					<input class="input100 form-inline form-control" type="text"
-						id="patient_SSN" name="patient_SSN" maxLength="9" placeholder="Enter the ssn..." />
+						id="patient_SSN" name="patient_SSN" maxLength="9"
+						placeholder="Enter the ssn..." /> <span class="focus-input100"></span>
+				</div>
+				<div class="form-group row">
+					<div class=" validate-input m-b-23 col-sm-6"
+						data-validate="Enter a Valid Age">
+						<span class="label-input100 ">Age</span> <input
+							class="input100 form-control" type="text" maxLength="3"
+							id="patient_age" name="patient_age"
+							placeholder="Enter the age..." />
+					</div>
+
+					<div class=" validate-input m-b-23 col-sm-6"
+						data-validate="Select a valid room Type" id="div2">
+						<span class="label-input100 ">Type Of Room</span> <select
+							id="type_of_room" name="type_of_room"
+							class="input100 form-control">
+							<option value="Single Room" selected>Single Room</option>
+							<option value="Semi-Sharing">Semi-Sharing</option>
+							<option value="General Ward">General Ward</option>
+						</select>
+					</div>
+				</div>
+				<div class="wrap-input100 validate-input m-b-23 "
+					data-validate="Enter a Valid Address">
+					<span class="label-input100">Address</span>
+					<textarea name="address" id="address" class="input100 form-control"
+						form="patientForm" placeholder="Enter the address..."></textarea>
 					<span class="focus-input100"></span>
 				</div>
-				<div class="wrap-input100 validate-input m-b-23"
-					data-validate="Enter a Valid Age">
-					<span class="label-input100 ">Age</span> <input
-						class="input100 form-control" type="text" maxLength="3" id="patient_age" name="patient_age" placeholder="Enter the age..."/>
-					<span class="focus-input100"></span>
-				</div>
-				
-				<div class="wrap-input100 validate-input m-b-23"
-					data-validate="Select a valid room Type" id="div2">
-					<span class="label-input100 ">Type Of Room</span> <select id="type_of_room"
-						name="type_of_room" class="input100 form-control">
-						<option value="Single Room" selected>Single Room</option>
-						<option value="Semi-Sharing">Semi-Sharing</option>
-						<option value="General Ward">General Ward</option>						
-					</select> <span class="focus-input100"></span>
+				<div class="form-group row">
+					<div class=" validate-input m-b-23 col-sm-6"
+						data-validate="Enter a Valid City">
+						<span class="label-input100">City</span> <input
+							class="input100 form-control" type="text" id="city" name="city"
+							placeholder="Enter the City..." />
+					</div>
+
+					<div class=" validate-input m-b-23 col-sm-6"
+						data-validate="Enter a Valid State">
+						<span class="label-input100">State</span> <input
+							class="input100 form-control" type="text" id="state" name="state"
+							placeholder="Enter the State..." />
+					</div>
 				</div>
 
-				<div class="wrap-input100 validate-input m-b-23"
-					data-validate="Enter a Valid Address">
-					<span class="label-input100">Address</span> 
-					<textarea name="address" id="address" class="input100 form-control" form="patientForm" placeholder="Enter the address..."></textarea>
-					<span class="focus-input100"></span>
-				</div>
-				
-				<div class="wrap-input100 validate-input m-b-23"
-					data-validate="Enter a Valid City">
-					<span class="label-input100">City</span> <input
-						class="input100 form-control" type="text" id="city" name="city"
-						placeholder="Enter the name..." /> <span class="focus-input100"></span>
-				</div>
-				
-				<div class="wrap-input100 validate-input m-b-23"
-					data-validate="Enter a Valid State">
-					<span class="label-input100">State</span> <input
-						class="input100 form-control" type="text" id="state" name="state"
-						placeholder="Enter the name..." /> <span class="focus-input100"></span>
-				</div>
-				
-				
-				<input type="hidden" id="action" name="action"
-					value="createPatient" />
+				<input type="hidden" id="action" name="action" value="createPatient" />
 				<div class="col-md-12 text-center">
 					<button type="reset" class="btn btn-primary active" id="reset">Reset</button>
 					&ensp; <input type="submit" class="btn btn-primary active"
