@@ -15,13 +15,12 @@ import com.abc.beans.Patient;
 import com.abc.beans.User;
 import com.abc.services.AdminDeskService;
 
-
 @WebServlet(description = "admin desk controller", urlPatterns = { "/AdminDeskController" })
 public class AdminDeskController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-  
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher rd;
 		HttpSession session = request.getSession();
 		User currentUser = (User) session.getAttribute("currentUser");
@@ -29,13 +28,13 @@ public class AdminDeskController extends HttpServlet {
 			rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}
-		if(!currentUser.getWorkGroup().contentEquals("adminDesk")) {
+		if (!currentUser.getWorkGroup().contentEquals("adminDesk")) {
 			rd = request.getRequestDispatcher("Dashboard.jsp");
 			rd.forward(request, response);
 		}
-		String action ="";
+		String action = "";
 		action = request.getParameter("action");
-		
+
 		switch (action) {
 		case "createPatient":
 			rd = request.getRequestDispatcher("admindeskJSPs/createPatient.jsp");
@@ -55,7 +54,7 @@ public class AdminDeskController extends HttpServlet {
 			int recordsPerPage = 5;
 			List<Patient> patients = null;
 			patients = (List<Patient>) AdminDeskService.getPatients(currentPage, recordsPerPage);
-			
+
 			rd = request.getRequestDispatcher("admindeskJSPs/viewAllPatients.jsp");
 			rd.forward(request, response);
 			break;
@@ -80,19 +79,19 @@ public class AdminDeskController extends HttpServlet {
 		}
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher rd;
-		String action ="";
+		String action = "";
 		action = request.getParameter("action");
-		
+
 		switch (action) {
 		case "createPatient":
 			try {
 				Patient newPatient = new Patient();
-				String patient_name =  request.getParameter("patient_name");
+				String patient_name = request.getParameter("patient_name");
 				long patient_SSN = Long.parseLong(request.getParameter("patient_SSN"));
-				int  patient_age = Integer.parseInt( request.getParameter("patient_age"));
+				int patient_age = Integer.parseInt(request.getParameter("patient_age"));
 				String address = (String) request.getParameter("address");
 				String city = (String) request.getParameter("city");
 				String state = (String) request.getParameter("state");
@@ -104,43 +103,40 @@ public class AdminDeskController extends HttpServlet {
 				newPatient.setCity(city);
 				newPatient.setState(state);
 				newPatient.setType_of_room(type_of_room);
-				String patient_id =  AdminDeskService.createPatient(newPatient);
+				String patient_id = AdminDeskService.createPatient(newPatient);
 				response.setContentType("text/plain");
-				if(patient_id!=null) {
+				if (patient_id != null) {
 					response.getWriter().write(patient_id);
-				}else {
+				} else {
 					response.getWriter().write("failed");
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
 			}
 			break;
 		case "updatePatient":
 			String type = (String) request.getParameter("actionType");
 			if (type.contentEquals("fetch")) {
-				
-			}else {
-				
+
+			} else {
+
 			}
 			break;
 		case "deletePatient":
 			rd = request.getRequestDispatcher("admindeskJSPs/deletePatient.jsp");
 			rd.forward(request, response);
 			break;
-		
-		
+
 		case "viewAllPatients":
 			// pagination
 			int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			int recordsPerPage = 5;
 			List<Patient> patients = null;
 			patients = (List<Patient>) AdminDeskService.getPatients(currentPage, recordsPerPage);
-			
+
 			rd = request.getRequestDispatcher("admindeskJSPs/viewAllPatients.jsp");
 			rd.forward(request, response);
 			break;
-			
-			
+
 		case "searchPatient":
 			rd = request.getRequestDispatcher("admindeskJSPs/searchPatient.jsp");
 			rd.forward(request, response);
