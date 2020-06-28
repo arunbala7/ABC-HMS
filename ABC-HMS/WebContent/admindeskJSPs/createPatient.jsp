@@ -15,8 +15,8 @@
 	href="CSS and JS/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="CSS and JS/fonts/iconic/css/material-design-iconic-font.min.css" />
-<link rel="stylesheet" type="text/css" href="CSS and JS/css/util.css" />
-<link rel="stylesheet" type="text/css" href="CSS and JS/css/main.css" />
+<link rel="stylesheet" type="text/css" href="CSS and JS/css/util1.css" />
+<link rel="stylesheet" type="text/css" href="CSS and JS/css/main1.css" />
 <script type="text/javascript" src="CSS and JS/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="CSS and JS/js/sweetalert.min.js"></script>
 <script type="text/javascript" src="CSS and JS/js/validation.js"></script>
@@ -71,7 +71,7 @@ $(document).ready(function() {
 	            	if(data!=="failed"){
 	            	swal({
 	            		  title: "Success",
-	            		  text: "Customer Created Successfully with the ID:"+data,
+	            		  text: "Patient Created Successfully with the ID:"+data,
 	            		  icon: "success",
 	            		  button: "Okay",
 	            		}).then((value) => {
@@ -144,19 +144,18 @@ $(document).ready(function() {
 	});
 </script>
 </head>
-<body>
+<body style="background-image: url('CSS and JS/images/other.jpg'); background-repeat: no-repeat;background-attachment: fixed; background-size: cover;">
 	<%@ include file="../adminDeskHeader.jsp"%>
-	<div class="container-login100"
-		style="background-image: url('CSS and JS/images/other.jpg'); background-repeat: no-repeat; background-size: cover;">
+	<div class="container-login100">
 		<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 			<span class="login100-form-title"
 				style="font-size: 30px; color: crimson;">Create Patient</span><br />
 			<form autocomplete="off" class="login100-form validate-form "
-				id="customerForm">
+				id="patientForm">
 				<div class="wrap-input100 validate-input m-b-23"
 					data-validate="Enter a Valid Name">
 					<span class="label-input100">Name</span> <input
-						class="input100 form-control" type="text" id="name" name="name"
+						class="input100 form-control" type="text" id="patient_name" name="patient_name"
 						placeholder="Enter the name..." /> <span class="focus-input100"></span>
 				</div>
 
@@ -164,23 +163,48 @@ $(document).ready(function() {
 					data-validate="Enter a Valid SSN">
 					<span class="label-input100" id="ssn">Social Security Number</span>
 					<input class="input100 form-inline form-control" type="text"
-						id="ssno" name="ssn" maxLength="9" placeholder="Enter the ssn..." />
+						id="patient_SSN" name="patient_SSN" maxLength="9" placeholder="Enter the ssn..." />
 					<span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100 validate-input m-b-23"
-					data-validate="Enter a Valid DOB">
-					<span class="label-input100 ">Date of Birth</span> <input
-						class="input100 form-control" type="date" id="dob" name="dob" />
+					data-validate="Enter a Valid Age">
+					<span class="label-input100 ">Age</span> <input
+						class="input100 form-control" type="text" id="patient_age" name="patient_age" placeholder="Enter the age..."/>
 					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input m-b-23 after-id"
+					data-validate="Select a valid room Type" id="div2">
+					<span class="label-input100 ">Type Of Room</span> <select id="type_of_room"
+						name="type_of_room" class="input100 form-control">
+						<option value="Single Room" selected>Single Room</option>
+						<option value="Semi-Sharing">Semi-Sharing</option>
+						<option value="General Ward">General Ward</option>						
+					</select> <span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input m-b-23"
 					data-validate="Enter a Valid Address">
-					<span class="label-input100">Address</span> <input
-						class="input100 form-control" type="text"
-						placeholder="Enter the address..." id="address" name="address" />
+					<span class="label-input100">Address</span> 
+					<textarea name="address" id="address" class="input100 form-control" form="patientForm" placeholder="Enter the address..."></textarea>
 					<span class="focus-input100"></span>
 				</div>
+				
+				<div class="wrap-input100 validate-input m-b-23"
+					data-validate="Enter a Valid City">
+					<span class="label-input100">City</span> <input
+						class="input100 form-control" type="text" id="city" name="city"
+						placeholder="Enter the name..." /> <span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input m-b-23"
+					data-validate="Enter a Valid State">
+					<span class="label-input100">State</span> <input
+						class="input100 form-control" type="text" id="state" name="state"
+						placeholder="Enter the name..." /> <span class="focus-input100"></span>
+				</div>
+				
+				
 				<input type="hidden" id="action" name="action"
 					value="createCustomer" />
 				<div class="col-md-12 text-center">
