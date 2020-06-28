@@ -16,7 +16,7 @@ import com.abc.beans.User;
 import com.abc.services.AdminDeskService;
 
 
-@WebServlet(description = "admin desk executive controller", urlPatterns = { "/AdminDesk" })
+@WebServlet(description = "admin desk controller", urlPatterns = { "/AdminDeskController" })
 public class AdminDeskController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
