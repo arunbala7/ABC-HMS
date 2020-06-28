@@ -21,4 +21,17 @@ public class AdminDeskService {
 		
 	}
 
+
+	public static Patient getPatient(Long patient_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public static boolean updatePatient(Patient oldPatient) {
+		return false;
+		// TODO Auto-generated method stub
+		
+	}
+
 }

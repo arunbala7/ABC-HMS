@@ -14,10 +14,12 @@ import javax.servlet.http.HttpSession;
 import com.abc.beans.Patient;
 import com.abc.beans.User;
 import com.abc.services.AdminDeskService;
+import com.google.gson.Gson;
 
 @WebServlet(description = "admin desk controller", urlPatterns = { "/AdminDeskController" })
 public class AdminDeskController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Gson gson = new Gson();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -114,11 +116,43 @@ public class AdminDeskController extends HttpServlet {
 			}
 			break;
 		case "updatePatient":
-			String type = (String) request.getParameter("actionType");
-			if (type.contentEquals("fetch")) {
+			try {
+				String type = (String) request.getParameter("actionType");
+				if (type.contentEquals("fetch")) {
+					Patient patient = new Patient();
+					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
+					patient = AdminDeskService.getPatient(patient_id);
+					if(patient!=null) {
+						response.setContentType("application/json");
+						String personJson = this.gson.toJson(patient);
+						response.getWriter().print(personJson);
+					}else {
+						response.getWriter().print("{}");
+					}
+				} else {
+					Patient oldPatient = new Patient();
+					String patient_name = request.getParameter("patient_name");
+					int patient_age = Integer.parseInt(request.getParameter("patient_age"));
+					String address = (String) request.getParameter("address");
+					String city = (String) request.getParameter("city");
+					String state = (String) request.getParameter("state");
+					String type_of_room = (String) request.getParameter("type_of_room");
+					
+					oldPatient.setPatient_name(patient_name);
+					oldPatient.setPatient_age(patient_age);
+					oldPatient.setAddress(address);
+					oldPatient.setCity(city);
+					oldPatient.setState(state);
+					oldPatient.setType_of_room(type_of_room);
+					
+					if(AdminDeskService.updatePatient(oldPatient)) {
+						response.getWriter().write("success");
+					} else {
+						response.getWriter().write("failed");
+					}
 
-			} else {
-
+				}
+			} catch (Exception e) {
 			}
 			break;
 		case "deletePatient":
