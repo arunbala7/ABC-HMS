@@ -168,7 +168,7 @@ public class AdminDeskController extends HttpServlet {
 					} else {
 						response.getWriter().print("{}");
 					}
-				}else {
+				} else {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					response.setContentType("text/plain");
 					if (AdminDeskService.deletePatient(patient_id)) {
@@ -182,20 +182,20 @@ public class AdminDeskController extends HttpServlet {
 
 			break;
 
-		case "viewAllPatients":
-			// pagination
-			int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			int recordsPerPage = 5;
-			List<Patient> patients = null;
-			patients = (List<Patient>) AdminDeskService.getPatients(currentPage, recordsPerPage);
-
-			rd = request.getRequestDispatcher("admindeskJSPs/viewAllPatients.jsp");
-			rd.forward(request, response);
-			break;
-
 		case "searchPatient":
-			rd = request.getRequestDispatcher("admindeskJSPs/searchPatient.jsp");
-			rd.forward(request, response);
+			try {
+				Patient patient = new Patient();
+				Long patient_id = Long.parseLong(request.getParameter("patient_id"));
+				patient = AdminDeskService.getPatient(patient_id);
+				if (patient != null) {
+					response.setContentType("application/json");
+					String personJson = this.gson.toJson(patient);
+					response.getWriter().print(personJson);
+				} else {
+					response.getWriter().print("{}");
+				}
+			} catch (Exception e) {
+			}
 			break;
 
 		case "findBilling":
