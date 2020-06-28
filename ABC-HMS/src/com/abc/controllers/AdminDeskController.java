@@ -122,11 +122,11 @@ public class AdminDeskController extends HttpServlet {
 					Patient patient = new Patient();
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					patient = AdminDeskService.getPatient(patient_id);
-					if(patient!=null) {
+					if (patient != null) {
 						response.setContentType("application/json");
 						String personJson = this.gson.toJson(patient);
 						response.getWriter().print(personJson);
-					}else {
+					} else {
 						response.getWriter().print("{}");
 					}
 				} else {
@@ -137,27 +137,49 @@ public class AdminDeskController extends HttpServlet {
 					String city = (String) request.getParameter("city");
 					String state = (String) request.getParameter("state");
 					String type_of_room = (String) request.getParameter("type_of_room");
-					
+
 					oldPatient.setPatient_name(patient_name);
 					oldPatient.setPatient_age(patient_age);
 					oldPatient.setAddress(address);
 					oldPatient.setCity(city);
 					oldPatient.setState(state);
 					oldPatient.setType_of_room(type_of_room);
-					
-					if(AdminDeskService.updatePatient(oldPatient)) {
+
+					if (AdminDeskService.updatePatient(oldPatient)) {
 						response.getWriter().write("success");
 					} else {
 						response.getWriter().write("failed");
 					}
-
 				}
 			} catch (Exception e) {
 			}
 			break;
 		case "deletePatient":
-			rd = request.getRequestDispatcher("admindeskJSPs/deletePatient.jsp");
-			rd.forward(request, response);
+			try {
+				String type = (String) request.getParameter("actionType");
+				if (type.contentEquals("fetch")) {
+					Patient patient = new Patient();
+					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
+					patient = AdminDeskService.getPatient(patient_id);
+					if (patient != null) {
+						response.setContentType("application/json");
+						String personJson = this.gson.toJson(patient);
+						response.getWriter().print(personJson);
+					} else {
+						response.getWriter().print("{}");
+					}
+				}else {
+					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
+					response.setContentType("text/plain");
+					if (AdminDeskService.deletePatient(patient_id)) {
+						response.getWriter().write("success");
+					} else {
+						response.getWriter().write("failed");
+					}
+				}
+			} catch (Exception e) {
+			}
+
 			break;
 
 		case "viewAllPatients":
