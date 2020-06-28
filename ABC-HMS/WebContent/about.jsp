@@ -52,7 +52,7 @@ p {
 
 .about-section {
   padding: 50px;
-  padding-top:50px;
+  padding-top:65px;
   text-align: center;
   background-color: #002266;
   color: white;
@@ -98,7 +98,7 @@ p {
 </style>
 
 </head>
-<body style="background-image: url('CSS and JS/images/other.jpg');background-size: cover;">
+<body style="background-image: url('CSS and JS/images/home.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
 	<!-- Adding Header Based on the user  -->
 	<c:choose>
 		<c:when test="${currentUser.getWorkGroup() =='adminDesk'}">
