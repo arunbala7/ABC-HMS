@@ -16,6 +16,7 @@ import com.abc.beans.User;
 import com.abc.services.AdminDeskService;
 import com.google.gson.Gson;
 
+
 @WebServlet(description = "admin desk controller", urlPatterns = { "/AdminDeskController" })
 public class AdminDeskController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,7 +31,7 @@ public class AdminDeskController extends HttpServlet {
 			rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}
-		if (currentUser!=null && !currentUser.getWorkGroup().contentEquals("adminDesk")) {
+		if (currentUser != null && !currentUser.getWorkGroup().contentEquals("adminDesk")) {
 			rd = request.getRequestDispatcher("Dashboard.jsp");
 			rd.forward(request, response);
 		}
@@ -51,14 +52,26 @@ public class AdminDeskController extends HttpServlet {
 			rd.forward(request, response);
 			break;
 		case "viewAllPatients":
-			// pagination
-			int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			int recordsPerPage = 5;
-			List<Patient> patients = null;
-			patients = (List<Patient>) AdminDeskService.getPatients(currentPage, recordsPerPage);
-
-			rd = request.getRequestDispatcher("admindeskJSPs/viewAllPatients.jsp");
-			rd.forward(request, response);
+			try {
+				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				int recordsPerPage = 5;
+				List<Patient> patients = null;
+				patients = (List<Patient>) AdminDeskService.getPatients(currentPage, recordsPerPage);
+				response.setContentType("text/html;charset=UTF-8");
+				request.setAttribute("patients", patients);
+				request.setAttribute("actionType", "show");
+				int rows = 0;
+				rows = AdminDeskService.getNoOfRows("patients");
+				int pages = rows / recordsPerPage;
+				if (rows % recordsPerPage > 0)
+					pages++;
+				request.setAttribute("pages", pages);
+				request.setAttribute("currentPage", currentPage);
+				request.setAttribute("recordsPerPage", recordsPerPage);
+				rd = request.getRequestDispatcher("admindeskJSPs/viewAllPatients.jsp");
+				rd.forward(request, response);
+			} catch (Exception e) {
+			}
 			break;
 		case "searchPatient":
 			rd = request.getRequestDispatcher("admindeskJSPs/searchPatient.jsp");
@@ -131,7 +144,7 @@ public class AdminDeskController extends HttpServlet {
 					}
 				} else {
 					Patient oldPatient = new Patient();
-					String patient_name = (String)request.getParameter("patient_name");
+					String patient_name = (String) request.getParameter("patient_name");
 					int patient_age = Integer.parseInt(request.getParameter("patient_age"));
 					String address = (String) request.getParameter("address");
 					String city = (String) request.getParameter("city");
@@ -181,6 +194,22 @@ public class AdminDeskController extends HttpServlet {
 			} catch (Exception e) {
 			}
 
+			break;
+
+		case "viewAllPatients":
+			try {
+				Long id = Long.parseLong(request.getParameter("id"));
+				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				Patient patient = null;
+				patient = AdminDeskService.getPatient(id);
+				request.setAttribute("patient", patient);
+				request.setAttribute("currentPage", currentPage);
+				request.setAttribute("actionType", "view");
+				rd = request.getRequestDispatcher("admindeskJSPs/viewAllPatients.jsp");
+				rd.forward(request, response);
+
+			} catch (Exception e) {
+			}
 			break;
 
 		case "searchPatient":

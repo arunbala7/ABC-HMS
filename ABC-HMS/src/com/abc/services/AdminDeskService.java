@@ -7,8 +7,10 @@ import com.abc.dao.HospitalDAO;
 
 public class AdminDeskService {
 
-	public static List<Patient> getPatients(int currentPage, int recordsPerPage) {
-		return null;
+	public static List<Patient> getPatients(int currentPage, int recordsPerPage) throws Exception {
+		HospitalDAO dao = new HospitalDAO();
+		int start = currentPage * recordsPerPage - recordsPerPage;
+		return dao.getPatients(start, recordsPerPage);
 
 	}
 
@@ -25,13 +27,19 @@ public class AdminDeskService {
 
 	public static boolean updatePatient(Patient patient) throws Exception {
 		HospitalDAO dao = new HospitalDAO();
-		return dao.updatePatient(patient);	
+		return dao.updatePatient(patient);
 
 	}
 
 	public static boolean deletePatient(Long patient_id) throws Exception {
 		HospitalDAO dao = new HospitalDAO();
-		return dao.deletePatient(patient_id);	
+		return dao.deletePatient(patient_id);
+	}
+
+	public static int getNoOfRows(String tableName) throws Exception {
+		HospitalDAO dao = new HospitalDAO();
+		return dao.getNoOfRows(tableName);
+		return 0;
 	}
 
 }
