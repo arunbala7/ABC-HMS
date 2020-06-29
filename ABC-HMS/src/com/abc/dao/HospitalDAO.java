@@ -161,7 +161,7 @@ public class HospitalDAO {
 		List<Medicine> medicines=new ArrayList<Medicine>();
 		Medicine medicine=null;
 		Connection con = (Connection) DBConnection.getConnection();
-		String query = "SELECT medicine_master.medicine_name,medicine_issued.quantity_issued,medicine_master.price FROM medicine_master INNER JOIN medicine_issued ON medicine_master.medicine_id = medicine_issued.medicine_id WHERE patient_id=?;";
+		String query = "SELECT medicine_issued.medicine_id,medicine_master.medicine_name,medicine_issued.quantity_issued,medicine_master.price FROM medicine_master INNER JOIN medicine_issued ON medicine_master.medicine_id = medicine_issued.medicine_id WHERE patient_id=?;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 		ps.setLong(1, patient_id);
 		ResultSet rs = ps.executeQuery();		
@@ -172,7 +172,6 @@ public class HospitalDAO {
 			medicine.setQuantityIssued(rs.getInt(3));
 			medicine.setMedicinePrice(rs.getFloat(4));
 			medicines.add(medicine);
-			System.out.println(medicine.toString());
 		}
 		DBConnection.closeConnection();
 		rs.close();
