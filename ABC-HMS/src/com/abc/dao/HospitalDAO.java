@@ -3,6 +3,8 @@ package com.abc.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mysql.jdbc.Connection;
 import com.abc.beans.Patient;
@@ -71,7 +73,8 @@ public class HospitalDAO {
 			patient.setType_of_room(rs.getString(6));
 			patient.setAddress(rs.getString(7));
 			patient.setCity(rs.getString(8));
-			patient.setState(rs.getString(9));			
+			patient.setState(rs.getString(9));
+			patient.setStatus(rs.getString(10));
 		}	
 		DBConnection.closeConnection();
 		ps.close();
@@ -110,5 +113,46 @@ public class HospitalDAO {
 			return true;
 		}
 		return false;
+	}
+
+	public List<Patient> getPatients(int start, int recordsPerPage) throws Exception {
+		List<Patient> patients  = new ArrayList<Patient>();
+		Patient patient = null;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT * FROM patient LIMIT ?,?";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setInt(1, start);
+		ps.setInt(2, recordsPerPage);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			patient = new Patient();
+			patient.setPatient_SSN(rs.getLong(1));
+			patient.setPatient_id(rs.getLong(2));
+			patient.setPatient_name(rs.getString(3));
+			patient.setPatient_age(rs.getInt(4));
+			patient.setPatient_date_of_admission(rs.getString(5));
+			patient.setType_of_room(rs.getString(6));			
+			patient.setAddress(rs.getString(7));
+			patient.setCity(rs.getString(8));
+			patient.setState(rs.getString(9));
+			patient.setStatus(rs.getString(10));
+			patients.add(patient);
+		}
+		DBConnection.closeConnection();
+		ps.close();
+		return patients;
+	}
+
+	public int getNoOfRows(String tableName) throws Exception {
+		int rows = 0;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT COUNT(patient_id) FROM " + tableName + ";";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next())
+			rows = rs.getInt(1);
+		DBConnection.closeConnection();
+		ps.close();
+		return rows;
 	}
 }

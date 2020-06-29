@@ -39,7 +39,6 @@ public class AdminDeskService {
 	public static int getNoOfRows(String tableName) throws Exception {
 		HospitalDAO dao = new HospitalDAO();
 		return dao.getNoOfRows(tableName);
-		return 0;
 	}
 
 }

@@ -61,7 +61,7 @@ public class AdminDeskController extends HttpServlet {
 				request.setAttribute("patients", patients);
 				request.setAttribute("actionType", "show");
 				int rows = 0;
-				rows = AdminDeskService.getNoOfRows("patients");
+				rows = AdminDeskService.getNoOfRows("patient");
 				int pages = rows / recordsPerPage;
 				if (rows % recordsPerPage > 0)
 					pages++;

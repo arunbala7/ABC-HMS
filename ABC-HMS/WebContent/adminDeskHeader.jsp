@@ -63,7 +63,7 @@
 						<a href="AdminDeskController?action=deletePatient"
 							class="dropdown-item btn btn-outline-light">Delete Patient</a>
 						<div class="dropdown-divider"></div>
-						<a href="AdminDeskController?action=viewAllPatient&currentPage=1"
+						<a href="AdminDeskController?action=viewAllPatients&currentPage=1"
 							class="dropdown-item btn btn-outline-light">View All Patients</a>
 					</div>
 				</div>
