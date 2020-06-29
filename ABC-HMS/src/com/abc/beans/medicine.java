@@ -1,6 +1,6 @@
 package com.abc.beans;
 
-public class medicines_issued {
+public class medicine {
 	private int issue_id,medicine_id,quantity_issued;
 	private long patient_id;
 	

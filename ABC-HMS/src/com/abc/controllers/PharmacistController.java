@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.beans.Patient;
 import com.abc.beans.User;
-import com.abc.beans.medicines_issued;
+import com.abc.beans.medicine;
 import com.abc.services.PharmacistServices;
 
 @WebServlet(description = "pharmacist request reseiver", urlPatterns = { "/PharmacistController" })
@@ -67,7 +67,7 @@ public class PharmacistController extends HttpServlet {
 				Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 				if (actionType.contentEquals("find")) {
 					Patient patient = null;
-					List<medicines_issued> medicines_issued = null;
+					List<medicine> medicines_issued = null;
 
 					patient = PharmacistServices.getPatient(patient_id);
 					if (patient != null) {
