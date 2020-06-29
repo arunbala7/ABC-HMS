@@ -10,7 +10,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?); -> ssn,name,age,address,city,state,status
 -- Show only : id, name, age, doj, address = address+city+state
 PS : SELECT * FROM patient WHERE patient_id=?; -> patient id
 PS : UPDATE patient SET patient_name = ?, patient_age=?, type_of_room=?,address =?, city=?, state=? WHERE patient_id = ?; -> new name,new age,new address, new city, new state, status, patient_id
-
+ 
 -- US004 : delete patient
 -- input : patient id
 -- Show only : id, name, age, doj, address = address+city+state
