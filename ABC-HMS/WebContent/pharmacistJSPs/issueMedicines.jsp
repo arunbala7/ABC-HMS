@@ -25,7 +25,33 @@
 <script type="text/javascript" src="CSS and JS/js/tether.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+		var msg=""+'${msg}';
+		if(msg!=""){
+			if(msg=="success"){
+				swal({
+          		  title: "Success",
+          		  text: "Patient Medicine Updated Successfully",
+          		  icon: "success",
+          		  button: "Okay",
+          		})
+			}else if(msg=="failed"){
+				swal({
+					title : "Failed",
+					text : "Medicine Not Updated, Please Try Again!",
+					icon : "error",
+					button : "Okay",
+				});
+			}
+			else{
+			swal({
+				title : "Failed",
+				text : msg,
+				icon : "error",
+				button : "Okay",
+			});
+		}
+		}
+		
 		var actionType = "" + '${actionType}';
 		if (actionType == "error") {
 			swal({
@@ -195,25 +221,31 @@
 					</div>
 
 					<form autocomplete="off" class="login100-form validate-form "
-						id="patientForm">
+						id="patientForm" action="PharmacistController" method="post">
 						<div class="form-group row">
 							<div class=" validate-input m-b-23 col-sm-6"
 								data-validate="Select a valid room Type" id="div2">
 								<span class="label-input100 ">Type Of Room</span> <select
 									id="type_of_room" name="type_of_room"
 									class="input100 form-control">
-									<option value="Single Room" selected>Single Room</option>
-									<option value="Semi-Sharing">Semi-Sharing</option>
-									<option value="General Ward">General Ward</option>
+									<c:forEach items="${availableMedicines}" var="medicine">
+										<option value="${medicine.getMedicineId}">${medicine.getMedicineName}</option>
+									</c:forEach>
 								</select>
+
+							</div>
+							<div class="col-sm-6">
+								<span class="label-input100">Quantity</span> <input
+									class="input100 form-control" type="text"
+									placeholder="Enter the Quantity..."
+									value="1"  />
 							</div>
 						</div>
 
 						<input type="hidden" id="action" name="action"
 							value="issueMedicines" /> <input type="hidden" id="actionType"
-							name="actionType" value="check" />
-							<input type="hidden" id="action"
-							name="actionType" value="check" />
+							name="actionType" value="check" /> <input type="hidden"
+							id="action" name="actionType" value="check" />
 
 						<div class="col-md-12 text-center">
 							<button type="reset" class="btn btn-primary active" id="reset">Reset</button>
