@@ -107,7 +107,20 @@ ELSE
 END IF;
 END$$
 DELIMITER ;
-
+ 
+DELIMITER $$
+CREATE PROCEDURE `add_medicine` (p_id BIGINT, m_id INT, reqested INT)
+BEGIN
+DECLARE isInMed_issued INT;
+SET isInMed_issued = EXISTS (SELECT * From medicine_issued Where patient_id = p_id);
+IF isInMed_issued > 0 THEN
+	UPDATE medicine_issued SET quantity_issued= quantity_issued + reqested WHERE patient_id = p_id AND medicine_id = m_id;
+    UPDATE medicine_master SET quantity_available = quantity_available - reqested WHERE medicine_id = m_id;
+ELSE
+	SELECT concat(0);
+END IF;
+END$$
+DELIMITER ;
 
 
 

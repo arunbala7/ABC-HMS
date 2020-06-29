@@ -35,4 +35,11 @@ ON medicine_master.medicine_id = medicine_issued.medicine_id WHERE patient_id=?;
 ------------------------------------------
 getAllMedicines
 SELECT medicine_id,medicine_name,price FROM medicine_master; 
-    
+------------------------------------------
+checkAvailability
+SELECT quantity_available FROM medicine_master WHERE medicine_id =?; -> medicine id
+------------------------------------------
+addMedicine
+call add_medicine(?,?,?); -> patient id , medicine id, quantity to issue
+
+ 

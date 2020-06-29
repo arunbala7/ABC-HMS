@@ -92,22 +92,22 @@ public class PharmacistController extends HttpServlet {
 					int medecineId = Integer.parseInt(request.getParameter("medicineId"));
 					int reqQuantity = Integer.parseInt(request.getParameter("quantity"));
 					int availableQuantity = PharmacistServices.checkAvailability(medecineId);
-					if(availableQuantity==0) {
+					if (availableQuantity == 0) {
 						request.setAttribute("msg", "Medicine not available!");
 						rd = request.getRequestDispatcher("pharmacistJSPs/issueMedicines.jsp");
 						rd.forward(request, response);
-					}else if (availableQuantity - reqQuantity < 0) {
-						request.setAttribute("msg", "Only "+ availableQuantity+" medicines available!");
+					} else if (availableQuantity - reqQuantity < 0) {
+						request.setAttribute("msg", "Only " + availableQuantity + " medicines available!");
 						rd = request.getRequestDispatcher("pharmacistJSPs/issueMedicines.jsp");
 						rd.forward(request, response);
 					} else {
-						if(PharmacistServices.addMedicine(patient_id,medecineId,reqQuantity)) {
+						if (PharmacistServices.addMedicine(patient_id, medecineId, reqQuantity)) {
 							request.setAttribute("action", "issueMedicines");
 							request.setAttribute("actionType", "find");
 							request.setAttribute("patient_id", patient_id);
 							rd = request.getRequestDispatcher("PharmacistController");
 							rd.forward(request, response);
-						}	
+						}
 					}
 				}
 
