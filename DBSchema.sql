@@ -67,36 +67,36 @@ ON DELETE CASCADE
 );
 ALTER TABLE medicine_issued AUTO_INCREMENT = 20000;
 
+CREATE TABLE diagnostics_master(
+test_id INT AUTO_INCREMENT,
+test_name VARCHAR(20),
+test_charge FLOAT,
+PRIMARY KEY (test_id)
+);
+ALTER TABLE diagnostics_master AUTO_INCREMENT = 30000;
+INSERT INTO diagnostics_master (test_name,test_charge) VALUES('CBP',11000);
+INSERT INTO diagnostics_master (test_name,test_charge) VALUES('Lipid',5000);
+INSERT INTO diagnostics_master (test_name,test_charge) VALUES('ECG',8500);
+INSERT INTO diagnostics_master (test_name,test_charge) VALUES('Echo',7500);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+CREATE TABLE diagnostics_conducted(
+diag_id INT AUTO_INCREMENT,
+patient_id BIGINT,
+test_id INT,
+PRIMARY KEY (diag_id),
+FOREIGN KEY (patient_id) REFERENCES patient(patient_id)
+ON DELETE CASCADE,
+FOREIGN KEY (test_id) REFERENCES diagnostics_master(test_id)
+ON UPDATE CASCADE
+);
 
 -- Procedure to check if user exists if yes return that record else return oops 
--- US001 
+-- check if userexist 
 DELIMITER $$
 CREATE PROCEDURE `is_user` (u_name VARCHAR(20), psw VARCHAR(20))
 BEGIN
 DECLARE COUNT INT;
 DECLARE id INT;
-DECLARE last_login_time DATETIME ;
 SET COUNT = EXISTS (SELECT * From userstore Where user_name = u_name AND user_password = psw);
 SET id = (SELECT user_id FROM userstore where user_name = u_name AND user_password = psw);
 IF COUNT>0 THEN
@@ -107,5 +107,7 @@ ELSE
 END IF;
 END$$
 DELIMITER ;
+
+
 
 

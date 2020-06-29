@@ -16,7 +16,6 @@ import com.abc.beans.User;
 import com.abc.services.AdminDeskService;
 import com.google.gson.Gson;
 
-
 @WebServlet(description = "admin desk controller", urlPatterns = { "/AdminDeskController" })
 public class AdminDeskController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -232,11 +231,6 @@ public class AdminDeskController extends HttpServlet {
 			rd = request.getRequestDispatcher("admindeskJSPs/findBilling.jsp");
 			rd.forward(request, response);
 			break;
-		case "about":
-			rd = request.getRequestDispatcher("about.jsp");
-			rd.forward(request, response);
-			break;
-
 		default:
 			rd = request.getRequestDispatcher("Dashboard.jsp");
 			rd.forward(request, response);
