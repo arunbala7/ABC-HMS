@@ -28,7 +28,7 @@ public class PharmacistServices {
 
 	public static int checkAvailability(int medecineId) throws Exception{
 		HospitalDAO dao = new HospitalDAO();
-		return dao.checkAvailability();
+		return dao.checkAvailability(medecineId);
 	}
 
 	public static boolean addMedicine(Long patient_id, int medecineId, int reqQuantity) {
