@@ -34,9 +34,7 @@
 					<%@ include file="pharmacistHeader.jsp"%>
 				</c:when>
 				<c:otherwise>
-					<c:when test="${currentUser.getWorkGroup() =='diagnostician'}">
-						<%@ include file="diagnosticianHeader.jsp"%>
-					</c:when>
+					<%@ include file="diagnosticianHeader.jsp"%>
 				</c:otherwise>
 			</c:choose>
 		</c:otherwise>
