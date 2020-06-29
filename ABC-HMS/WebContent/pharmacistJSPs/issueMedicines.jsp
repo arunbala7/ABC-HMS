@@ -189,7 +189,38 @@
 
 						</table>
 					</div>
+					<div class="d-flex justify-content-center">
+						<button class="btn btn-primary active" id="issue">Issue
+							Medicines</button>
+					</div>
 
+					<form autocomplete="off" class="login100-form validate-form "
+						id="patientForm">
+						<div class="form-group row">
+							<div class=" validate-input m-b-23 col-sm-6"
+								data-validate="Select a valid room Type" id="div2">
+								<span class="label-input100 ">Type Of Room</span> <select
+									id="type_of_room" name="type_of_room"
+									class="input100 form-control">
+									<option value="Single Room" selected>Single Room</option>
+									<option value="Semi-Sharing">Semi-Sharing</option>
+									<option value="General Ward">General Ward</option>
+								</select>
+							</div>
+						</div>
+
+						<input type="hidden" id="action" name="action"
+							value="issueMedicines" /> <input type="hidden" id="actionType"
+							name="actionType" value="check" />
+							<input type="hidden" id="action"
+							name="actionType" value="check" />
+
+						<div class="col-md-12 text-center">
+							<button type="reset" class="btn btn-primary active" id="reset">Reset</button>
+							&ensp; <input type="submit" class="btn btn-primary active"
+								id="submitForm" value="Create" />
+						</div>
+					</form>
 
 
 				</div>
