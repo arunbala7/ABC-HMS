@@ -28,7 +28,7 @@ PS : SELECT * FROM patient WHERE patient_status='ACTIVE' LIMIT ?,?; -> start_val
 PS : SELECT * FROM patient WHERE patient_id=?; -> patient id
 
 getAllMedicinesIssued
-SELECT medicine_master.medicine_name,medicine_issued.quantity_issued,medicine_master.price
+SELECT medicine_issued.medicine_id, medicine_master.medicine_name,medicine_issued.quantity_issued,medicine_master.price
 FROM medicine_master
 INNER JOIN medicine_issued
 ON medicine_master.medicine_id = medicine_issued.medicine_id WHERE patient_id=?; -> patient_id
