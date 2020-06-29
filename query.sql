@@ -27,7 +27,10 @@ PS : SELECT * FROM patient WHERE patient_status='ACTIVE' LIMIT ?,?; -> start_val
 -- Show only : id, name, age, doj, address = address+city+state
 PS : SELECT * FROM patient WHERE patient_id=?; -> patient id
 
--- Issue medicin
--- input : patient id
-	-- check if patient exist
+getAllMedicinesIssued
+SELECT medicine_master.medicine_name,medicine_issued.quantity_issued,medicine_master.price
+FROM medicine_master
+INNER JOIN medicine_issued
+ON medicine_master.medicine_id = medicine_issued.medicine_id WHERE patient_id=?; -> patient_id
+    
     
