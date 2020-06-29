@@ -172,6 +172,7 @@ public class HospitalDAO {
 			medicine.setQuantityIssued(rs.getInt(3));
 			medicine.setMedicinePrice(rs.getFloat(4));
 			medicines.add(medicine);
+			System.out.println(medicine.toString());
 		}
 		DBConnection.closeConnection();
 		rs.close();

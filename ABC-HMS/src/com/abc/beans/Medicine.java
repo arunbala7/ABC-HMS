@@ -2,8 +2,9 @@ package com.abc.beans;
 
 public class Medicine {
 	private String medicineName;
-	private int medicineId, quantityIssued, medicinePrice, quantityAvailable;
+	private int medicineId, quantityIssued, quantityAvailable;
 	private long patient_id;
+	private float medicinePrice;
 
 	@Override
 	public String toString() {
@@ -36,11 +37,11 @@ public class Medicine {
 		this.quantityIssued = quantityIssued;
 	}
 
-	public int getMedicinePrice() {
+	public float getMedicinePrice() {
 		return medicinePrice;
 	}
 
-	public void setMedicinePrice(int medicinePrice) {
+	public void setMedicinePrice(float medicinePrice) {
 		this.medicinePrice = medicinePrice;
 	}
 
