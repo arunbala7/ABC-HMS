@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.beans.Patient;
 import com.abc.beans.User;
+import com.abc.services.PharmacistServices;
 
 @WebServlet(description = "pharmacist request reseiver", urlPatterns = { "/PharmacistController" })
 public class PharmacistController extends HttpServlet {
@@ -57,10 +59,11 @@ public class PharmacistController extends HttpServlet {
 
 		switch (action) {
 		case "issueMedicines":
-			String actionType = request.getParameter("actionType");
-
+			String actionType = "";
+			actionType = request.getParameter("actionType");
+			Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 			if (actionType.contentEquals("find")) {
-				
+				Patient patient = PharmacistServices.getPatient(patient_id);
 			} else {
 
 			}
