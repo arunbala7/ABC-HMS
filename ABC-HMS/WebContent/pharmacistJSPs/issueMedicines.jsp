@@ -26,10 +26,20 @@
 <script>
 	$(document).ready(function() {
 
+		var actionType = "" + '${actionType}';
+		if (actionType == "error") {
+			swal({
+				title : "Failed",
+				text : "Patient ID Not found",
+				icon : "error",
+				button : "Okay",
+			});
+		}
+
 		$("#reset").click(function() {
 			$("#id").val("");
 		});
-		
+
 		"use strict";
 		//   [ Focus input ]
 		$('.input100').each(function() {
@@ -41,7 +51,7 @@
 				}
 			})
 		})
-		
+
 		var input = $('.validate-input .input100');
 
 		$('#Form').on('submit', function(e) {
@@ -52,7 +62,7 @@
 					showValidate(input[i]);
 					check = false;
 				}
-			}			
+			}
 			return check;
 		});
 
@@ -64,7 +74,7 @@
 
 		function validate(input) {
 			if ($(input).val().trim() == '')
-				return false;			
+				return false;
 		}
 
 		function showValidate(input) {
@@ -105,79 +115,83 @@
 									placeholder="Enter the ID..." /> <span class="focus-input100"></span>
 							</div>
 							<input type="hidden" name="action" value="issueMedicines">
-							<input type="hidden" name="actionType" value="find">							
+							<input type="hidden" name="actionType" value="find">
 						</form>
 						<div class="col-md-12 text-center after-id">
-								<button class="btn btn-primary active" id="reset">Reset</button>
-								&ensp;
-								<button type="submit" form="Form" class="btn btn-primary active"
-									id="patient_id">Find Patient</button>
-							</div>
+							<button class="btn btn-primary active" id="reset">Reset</button>
+							&ensp;
+							<button type="submit" form="Form" class="btn btn-primary active"
+								id="patient_id">Find Patient</button>
+						</div>
 					</div>
 				</div>
-
 			</c:when>
 			<c:otherwise>
-				<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-					<span class="login100-form-title"
-						style="font-size: 20px; color: crimson;">Viewing Patient
-						ID: ${patient.getPatient_id()}</span><br />
-					<form autocomplete="off" id="patientForm">
-						<div class="form-group row">
-							<div class="col-sm-6">
-								<span class="label-input100">Patient ID</span> <input
-									class="input100 form-control" type="text"
-									placeholder="Enter the id..."
-									value="${patient.getPatient_id()}" readonly />
-							</div>
-							<div class="col-sm-6">
-								<span class="label-input100">Name</span> <input
-									class="input100 form-control" type="text"
-									placeholder="Enter the name..."
-									value="${patient.getPatient_name()}" readonly />
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-6">
-								<span class="label-input100">Date of Admission</span> <input
-									class="input100 form-control" type="text"
-									placeholder="Enter the Date of Admission"
-									value="${patient.getPatient_date_of_admission()}" readonly />
-							</div>
-							<div class="col-sm-3">
-								<span class="label-input100">Age</span> <input
-									class="input100 form-control" type="text"
-									placeholder="Enter the age..."
-									value="${patient.getPatient_age()}" readonly />
-							</div>
-							<div class="col-sm-3">
-								<span class="label-input100">Status</span> <input
-									class="input100 form-control" type="text"
-									placeholder="Enter the status..."
-									value="${patient.getStatus()}" readonly />
-							</div>
-						</div>
-						<div class="form-group row">
+				<div class="container my-4  p-t-30 p-b-30 "
+					style="background-color: white;">
+					<div class=" p-l-55 p-r-55 p-t-5 p-b-5 ">
+						<span class="login100-form-title"
+							style="font-size: 30px; color: crimson;">Patient Details</span><br />
+					</div>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Patient ID</th>
+									<th>Name</th>
+									<th>Age</th>
+									<th>Address</th>
+									<th>Date of Admission</th>
+									<th>Type of Room</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>${patient.getPatient_id()}</td>
+									<td>${patient.getPatient_name()}</td>
+									<td>${patient.getPatient_age()}</td>
+									<td>${patient.getAddress()},${patient.getCity()},
+										${patient.getState()}</td>
+									<td>${patient.getPatient_date_of_admission()}</td>
+									<td>${patient.getType_of_room()}</td>
+									<td>${patient.getStatus() }</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class=" p-l-55 p-r-55 p-t-5 p-b-5 ">
+						<span class="login100-form-title"
+							style="font-size: 30px; color: crimson;">Issued Medicines</span><br />
+					</div>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Medicine ID</th>
+									<th>Medicine Name</th>
+									<th>Quantity</th>
+									<th>Rate</th>
+									<th>Amount</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${medicines}" var="medicine">
+									<tr>
+										<td>${medicine.getMedicineId()}</td>
+										<td>${medicine.getMedicineName()}</td>
+										<td>${medicine.getQuantityIssued()}</td>
+										<td>${medicine.getMedicinePrice()}</td>
+										<td>${medicine.getQuantityIssued() * medicine.getMedicinePrice()}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
 
-							<div class="col-sm-12">
-								<span class="label-input100">Type of Room</span> <input
-									class="input100 form-control" type="text"
-									placeholder="Enter the type of room..."
-									value="${patient.getType_of_room()}" readonly />
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-12" data-validate="Enter a Valid Address">
-								<span class="label-input100">Address</span>
-								<textarea class="input100 form-control" form="patientForm"
-									placeholder="Enter the address..." readonly>${patient.getAddress()}, ${patient.getCity()}, ${patient.getState()}</textarea>
-							</div>
-						</div>
-						<div class="col-md-12 text-center">
-							<a class="btn btn-primary active"
-								href="AdminDeskController?action=viewAllPatients&currentPage=${currentPage}">Back</a>
-						</div>
-					</form>
+						</table>
+					</div>
+
+
+
 				</div>
 			</c:otherwise>
 		</c:choose>

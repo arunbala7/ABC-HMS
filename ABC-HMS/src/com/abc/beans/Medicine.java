@@ -2,8 +2,9 @@ package com.abc.beans;
 
 public class Medicine {
 	private String medicineName;
-	private int medicineId, quantityIssued, medicinePrice,quantityAvailable;
+	private int medicineId, quantityIssued,quantityAvailable;
 	private long patient_id;
+	private float medicinePrice;
 
 	
 
@@ -59,14 +60,14 @@ public class Medicine {
 	/**
 	 * @return the medicinePrice
 	 */
-	public int getMedicinePrice() {
+	public float getMedicinePrice() {
 		return medicinePrice;
 	}
 
 	/**
 	 * @param medicinePrice the medicinePrice to set
 	 */
-	public void setMedicinePrice(int medicinePrice) {
+	public void setMedicinePrice(float medicinePrice) {
 		this.medicinePrice = medicinePrice;
 	}
 

@@ -26,7 +26,6 @@
 <script type="text/javascript" src="CSS and JS/js/tether.min.js"></script>
 <script>
 	$(document).ready(function() {
-
 		$("#reset").on("click", function() {
 			window.location = "./AdminDeskController?action=Dashboard";
 		});

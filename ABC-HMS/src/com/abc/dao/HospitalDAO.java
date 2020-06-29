@@ -157,8 +157,24 @@ public class HospitalDAO {
 		return rows;
 	}
 
-	public List<Medicine> getAllMedicinesIssued(Long patient_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Medicine> getAllMedicinesIssued(Long patient_id) throws Exception {
+		List<Medicine> medicines=new ArrayList<Medicine>();
+		Medicine medicine=null;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT medicine_master.medicine_name,medicine_issued.quantity_issued,medicine_master.price FROM medicine_master INNER JOIN medicine_issued ON medicine_master.medicine_id = medicine_issued.medicine_id WHERE patient_id=?;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setLong(1, patient_id);
+		ResultSet rs = ps.executeQuery();		
+		while(rs.next()) {
+			medicine=new Medicine();
+			medicine.setMedicineId(rs.getInt(1));
+			medicine.setMedicineName(rs.getString(2));
+			medicine.setQuantityIssued(rs.getInt(3));
+			medicine.setMedicinePrice(rs.getFloat(4));
+			medicines.add(medicine);
+		}
+		DBConnection.closeConnection();
+		rs.close();
+		return medicines;
 	}
 }
