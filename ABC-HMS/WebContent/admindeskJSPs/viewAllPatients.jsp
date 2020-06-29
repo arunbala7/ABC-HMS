@@ -55,6 +55,7 @@
 									<th>Address</th>
 									<th>Date of Admission</th>
 									<th>Type of Room</th>
+									<th>View details</th>
 								</tr>
 							</thead>
 							<tbody>
