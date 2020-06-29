@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.lookup.ImplicitNullAnnotationVerifier;
+
 import com.abc.beans.Patient;
 import com.abc.beans.User;
 import com.abc.beans.Medicine;
@@ -85,6 +87,28 @@ public class PharmacistController extends HttpServlet {
 					availableMedicines = PharmacistServices.getAllMedicines();
 					HttpSession session = request.getSession();
 					session.setAttribute("availableMedicines", availableMedicines);
+				} else if (actionType.contentEquals("check")) {
+					patient_id = Long.parseLong(request.getParameter("patient_id"));
+					int medecineId = Integer.parseInt(request.getParameter("medicineId"));
+					int reqQuantity = Integer.parseInt(request.getParameter("quantity"));
+					int availableQuantity = PharmacistServices.checkAvailability(medecineId);
+					if(availableQuantity==0) {
+						request.setAttribute("msg", "Medicine not available!");
+						rd = request.getRequestDispatcher("pharmacistJSPs/issueMedicines.jsp");
+						rd.forward(request, response);
+					}else if (availableQuantity - reqQuantity < 0) {
+						request.setAttribute("msg", "Only "+ availableQuantity+" medicines available!");
+						rd = request.getRequestDispatcher("pharmacistJSPs/issueMedicines.jsp");
+						rd.forward(request, response);
+					} else {
+						if(PharmacistServices.addMedicine(patient_id,medecineId,reqQuantity)) {
+							request.setAttribute("action", "issueMedicines");
+							request.setAttribute("actionType", "find");
+							request.setAttribute("patient_id", patient_id);
+							rd = request.getRequestDispatcher("PharmacistController");
+							rd.forward(request, response);
+						}	
+					}
 				}
 
 			} catch (Exception e) {
