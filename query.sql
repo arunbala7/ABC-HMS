@@ -20,7 +20,7 @@ PS : DELETE FROM patient WHERE (patient_id = ?); -> patient id
 -- US005 : View all patients
 -- input : patient id
 -- Show only : id, name, age, doj, address = address+city+state
-PS : SELECT * FROM patient LIMIT ?,?; -> start_value,end_value
+PS : SELECT * FROM patient WHERE patient_status='Active' LIMIT ?,?; -> start_value,end_value
 
 -- US006 : Search patient
 -- input : patient id
