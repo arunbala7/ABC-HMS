@@ -64,13 +64,13 @@ public class PharmacistController extends HttpServlet {
 			try {
 				String actionType = "";
 				actionType = (String) request.getParameter("actionType");
-				
+
 				if (actionType.contentEquals("find")) {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					Patient patient = null;
 					List<Medicine> medicines_issued = null;
-					if(request.getParameter("msg")!=null) {
-						String msg=(String)request.getParameter("msg");
+					if (request.getParameter("msg") != null) {
+						String msg = (String) request.getParameter("msg");
 						request.setAttribute("msg", msg);
 					}
 					patient = PharmacistServices.getPatient(patient_id);
@@ -79,39 +79,56 @@ public class PharmacistController extends HttpServlet {
 						request.setAttribute("actionType", "show");
 						request.setAttribute("patient", patient);
 						request.setAttribute("medicines", medicines_issued);
+						HttpSession session = request.getSession();
+						if (session.getAttribute("availableMedicines") == null) {
+							List<Medicine> availableMedicines = null;
+							availableMedicines = PharmacistServices.getAllMedicines();
+							session.setAttribute("availableMedicines", availableMedicines);
+						}
 					} else {
 						request.setAttribute("actionType", "error");
 					}
 					rd = request.getRequestDispatcher("pharmacistJSPs/issueMedicines.jsp");
 					rd.forward(request, response);
-				} else if (actionType.contentEquals("get")) {
-					List<Medicine> availableMedicines = null;
-					availableMedicines = PharmacistServices.getAllMedicines();
-					HttpSession session = request.getSession();
-					session.setAttribute("availableMedicines", availableMedicines);
 				} else if (actionType.contentEquals("check")) {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
-					int medecineId = Integer.parseInt(request.getParameter("medicineId"));
+					int medicineId = Integer.parseInt(request.getParameter("medicineId"));
 					int reqQuantity = Integer.parseInt(request.getParameter("quantity"));
-					int availableQuantity = PharmacistServices.checkAvailability(medecineId);
+					int availableQuantity = PharmacistServices.checkAvailability(medicineId);
 					if (availableQuantity == 0) {
 						request.setAttribute("msg", "Medicine not available!");
 					} else if (availableQuantity - reqQuantity < 0) {
-						request.setAttribute("msg", "Only " + availableQuantity + " medicines available!");					
+						request.setAttribute("msg", "Only " + availableQuantity + " medicines available!");
 					} else {
-						if (PharmacistServices.addMedicine(patient_id, medecineId, reqQuantity)) {
+						if (PharmacistServices.addMedicine(patient_id, medicineId, reqQuantity)) {
 							request.setAttribute("msg", "success");
-						}else {
+						} else {
 							request.setAttribute("msg", "failed");
 						}
 					}
-					request.setAttribute("action", "issueMedicines");
-					request.setAttribute("actionType", "find");
-					request.setAttribute("patient_id", patient_id);
-					rd = request.getRequestDispatcher("PharmacistController");
-					rd.forward(request, response);
-				}
+					Patient patient = null;
+					List<Medicine> medicines_issued = null;
+					if (request.getParameter("msg") != null) {
+						String msg = (String) request.getParameter("msg");
+						request.setAttribute("msg", msg);
+					}
+					patient = PharmacistServices.getPatient(patient_id);
+					if (patient != null) {
+						medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);
+						request.setAttribute("actionType", "show");
+						request.setAttribute("patient", patient);
+						request.setAttribute("medicines", medicines_issued);
+						HttpSession session = request.getSession();
+						if (session.getAttribute("availableMedicines") == null) {
+							List<Medicine> availableMedicines = null;
+							availableMedicines = PharmacistServices.getAllMedicines();
+							session.setAttribute("availableMedicines", availableMedicines);
+						}
+						rd = request.getRequestDispatcher("pharmacistJSPs/issueMedicines.jsp");
+						rd.forward(request, response);
+					}
 
+				}
 			} catch (Exception e) {
 			}
 			break;

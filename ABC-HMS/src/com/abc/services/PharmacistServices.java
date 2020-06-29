@@ -26,14 +26,14 @@ public class PharmacistServices {
 	}
 
 
-	public static int checkAvailability(int medecineId) throws Exception{
+	public static int checkAvailability(int medicineId) throws Exception{
 		HospitalDAO dao = new HospitalDAO();
-		return dao.checkAvailability(medecineId);
+		return dao.checkAvailability(medicineId);
 	}
 
-	public static boolean addMedicine(Long patient_id, int medecineId, int reqQuantity) {
+	public static boolean addMedicine(Long patient_id, int medicineId, int reqQuantity) throws Exception {
 		HospitalDAO dao = new HospitalDAO();
-		return dao.addMedicine(patient_id,medecineId,reqQuantity);
+		return dao.addMedicine(patient_id,medicineId,reqQuantity);
 	}
 
 }

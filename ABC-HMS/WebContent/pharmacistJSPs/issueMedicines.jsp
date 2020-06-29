@@ -25,32 +25,41 @@
 <script type="text/javascript" src="CSS and JS/js/tether.min.js"></script>
 <script>
 	$(document).ready(function() {
-		var msg=""+'${msg}';
-		if(msg!=""){
-			if(msg=="success"){
+		var msg = "" + '${msg}';
+		if (msg != "") {
+			if (msg == "success") {
 				swal({
-          		  title: "Success",
-          		  text: "Patient Medicine Updated Successfully",
-          		  icon: "success",
-          		  button: "Okay",
-          		})
-			}else if(msg=="failed"){
+					title : "Success",
+					text : "Patient Medicine Updated Successfully",
+					icon : "success",
+					button : "Okay",
+				})
+			} else if (msg == "failed") {
 				swal({
 					title : "Failed",
 					text : "Medicine Not Updated, Please Try Again!",
 					icon : "error",
 					button : "Okay",
 				});
+			} else {
+				swal({
+					title : "Failed",
+					text : msg,
+					icon : "error",
+					button : "Okay",
+				});
 			}
-			else{
-			swal({
-				title : "Failed",
-				text : msg,
-				icon : "error",
-				button : "Okay",
-			});
 		}
-		}
+		
+		$("#issue").click(()=>{
+			$(".after").css("display", "none");
+        	$(".before").css("display", "block");
+		});
+		
+		$("#reset1").click(()=>{
+			$(".after").css("display", "block");
+        	$(".before").css("display", "none");
+		});
 		
 		var actionType = "" + '${actionType}';
 		if (actionType == "error") {
@@ -146,8 +155,8 @@
 						<div class="col-md-12 text-center after-id">
 							<button class="btn btn-primary active" id="reset">Reset</button>
 							&ensp;
-							<button type="submit" form="Form" class="btn btn-primary active"
-								id="patient_id">Find Patient</button>
+							<button type="submit" form="Form" class="btn btn-primary active">Find
+								Patient</button>
 						</div>
 					</div>
 				</div>
@@ -215,44 +224,45 @@
 
 						</table>
 					</div>
-					<div class="d-flex justify-content-center">
-						<button class="btn btn-primary active" id="issue">Issue
+					<div class="d-flex justify-content-center after">
+						<button class="btn btn-primary active after" id="issue">Issue
 							Medicines</button>
 					</div>
-
-					<form autocomplete="off" class="login100-form validate-form "
-						id="patientForm" action="PharmacistController" method="post">
-						<div class="form-group row">
-							<div class=" validate-input m-b-23 col-sm-6"
+					<br>
+					<form style="display: none;" autocomplete="off"
+						class="login100-form validate-form before" id="patientForm"
+						action="PharmacistController" method="post">
+						<div class="form-group row d-flex justify-content-center">
+							<div class=" validate-input m-b-23 col-sm-3"
 								data-validate="Select a valid room Type" id="div2">
-								<span class="label-input100 ">Type Of Room</span> <select
-									id="type_of_room" name="type_of_room"
+								<span class="label-input100 ">Medicine Name</span> <select
+									id="type_of_room" name="medicineId"
 									class="input100 form-control">
 									<c:forEach items="${availableMedicines}" var="medicine">
-										<option value="${medicine.getMedicineId}">${medicine.getMedicineName}</option>
+										<option value="${medicine.getMedicineId()}">${medicine.getMedicineName()}</option>
 									</c:forEach>
 								</select>
 
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3 ">
 								<span class="label-input100">Quantity</span> <input
-									class="input100 form-control" type="text"
-									placeholder="Enter the Quantity..."
-									value="1"  />
+									class="input100 form-control" type="text" name="quantity"
+									placeholder="Enter the Quantity..." value="1" />
 							</div>
 						</div>
 
-						<input type="hidden" id="action" name="action"
-							value="issueMedicines" /> <input type="hidden" id="actionType"
-							name="actionType" value="check" /> <input type="hidden"
-							id="action" name="actionType" value="check" />
-
-						<div class="col-md-12 text-center">
-							<button type="reset" class="btn btn-primary active" id="reset">Reset</button>
-							&ensp; <input type="submit" class="btn btn-primary active"
-								id="submitForm" value="Create" />
-						</div>
+						<input type="hidden" name="action" value="issueMedicines" /> <input
+							type="hidden" name="actionType" value="check" /> <input
+							type="hidden" name="patient_id"
+							value="${patient.getPatient_id() }" />
 					</form>
+					<div class="col-md-12 d-flex justify-content-center before">
+						<button style="display: none;"
+							class="btn btn-primary active before" id="reset1">Cancel</button>
+						&ensp; <input style="display: none;" type="submit"
+							form="patientForm" class="btn btn-primary active before"
+							id="submitForm" value="Update" />
+					</div>
 
 
 				</div>

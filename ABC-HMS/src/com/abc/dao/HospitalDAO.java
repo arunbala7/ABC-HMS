@@ -6,11 +6,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.Connection;
 import com.abc.beans.Medicine;
 import com.abc.beans.Patient;
 import com.abc.beans.User;
 import com.abc.utils.DBConnection;
+import com.mysql.jdbc.Connection;
 
 public class HospitalDAO {
 	public User isValidUser(User user) throws Exception {
@@ -22,16 +22,16 @@ public class HospitalDAO {
 		ps.setString(2, user.getPassword());
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
-			if(rs.getInt(1)!=0)
-			new_User = new User(rs.getString(2), null, rs.getString(4), rs.getInt(1));
+			if (rs.getInt(1) != 0)
+				new_User = new User(rs.getString(2), null, rs.getString(4), rs.getInt(1));
 		}
 		DBConnection.closeConnection();
 		ps.close();
 		return new_User;
 	}
-	
+
 	public String createPatient(Patient patient) throws Exception {
-		String patient_id=null;
+		String patient_id = null;
 		Connection con = (Connection) DBConnection.getConnection();
 		String query = "SELECT * FROM patient WHERE `patient_SSN`= ?;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
@@ -40,11 +40,11 @@ public class HospitalDAO {
 		if (rs.next())
 			return null;
 		query = "INSERT INTO patient(patient_SSN,patient_name, patient_age, type_of_room, address, city, state) VALUES (?, ?, ?, ?, ?, ?, ?);";
-		ps = (PreparedStatement) con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+		ps = (PreparedStatement) con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		ps.setLong(1, patient.getPatient_SSN());
 		ps.setString(2, patient.getPatient_name());
 		ps.setInt(3, patient.getPatient_age());
-		ps.setString(4, patient.getType_of_room());	
+		ps.setString(4, patient.getType_of_room());
 		ps.setString(5, patient.getAddress());
 		ps.setString(6, patient.getCity());
 		ps.setString(7, patient.getState());
@@ -55,18 +55,18 @@ public class HospitalDAO {
 		DBConnection.closeConnection();
 		ps.close();
 		return patient_id;
-		
+
 	}
 
 	public Patient getPatient(Long patient_id) throws Exception {
-		Patient patient=null;
+		Patient patient = null;
 		Connection con = (Connection) DBConnection.getConnection();
 		String query = "SELECT * FROM patient WHERE `patient_id`= ?;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 		ps.setLong(1, patient_id);
 		ResultSet rs = ps.executeQuery();
-		if(rs.next()) {
-			patient=new Patient();
+		if (rs.next()) {
+			patient = new Patient();
 			patient.setPatient_id(patient_id);
 			patient.setPatient_name(rs.getString(3));
 			patient.setPatient_age(rs.getInt(4));
@@ -76,7 +76,7 @@ public class HospitalDAO {
 			patient.setCity(rs.getString(8));
 			patient.setState(rs.getString(9));
 			patient.setStatus(rs.getString(10));
-		}	
+		}
 		DBConnection.closeConnection();
 		ps.close();
 		return patient;
@@ -87,7 +87,7 @@ public class HospitalDAO {
 		String query = "UPDATE patient SET patient_name = ?, patient_age=?, type_of_room=?,address =?, city=?, state=? WHERE patient_id = ?;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 		ps.setString(1, patient.getPatient_name());
-		ps.setInt(2,patient.getPatient_age());
+		ps.setInt(2, patient.getPatient_age());
 		ps.setString(3, patient.getType_of_room());
 		ps.setString(4, patient.getAddress());
 		ps.setString(5, patient.getCity());
@@ -96,7 +96,7 @@ public class HospitalDAO {
 		int row = ps.executeUpdate();
 		DBConnection.closeConnection();
 		ps.close();
-		if(row==1) {
+		if (row == 1) {
 			return true;
 		}
 		return false;
@@ -110,14 +110,14 @@ public class HospitalDAO {
 		int row = ps.executeUpdate();
 		DBConnection.closeConnection();
 		ps.close();
-		if(row==1) {
+		if (row == 1) {
 			return true;
 		}
 		return false;
 	}
 
 	public List<Patient> getPatients(int start, int recordsPerPage) throws Exception {
-		List<Patient> patients  = new ArrayList<Patient>();
+		List<Patient> patients = new ArrayList<Patient>();
 		Patient patient = null;
 		Connection con = (Connection) DBConnection.getConnection();
 		String query = "SELECT * FROM patient LIMIT ?,?";
@@ -132,7 +132,7 @@ public class HospitalDAO {
 			patient.setPatient_name(rs.getString(3));
 			patient.setPatient_age(rs.getInt(4));
 			patient.setPatient_date_of_admission(rs.getString(5));
-			patient.setType_of_room(rs.getString(6));			
+			patient.setType_of_room(rs.getString(6));
 			patient.setAddress(rs.getString(7));
 			patient.setCity(rs.getString(8));
 			patient.setState(rs.getString(9));
@@ -158,15 +158,15 @@ public class HospitalDAO {
 	}
 
 	public List<Medicine> getAllMedicinesIssued(Long patient_id) throws Exception {
-		List<Medicine> medicines=new ArrayList<Medicine>();
-		Medicine medicine=null;
+		List<Medicine> medicines = new ArrayList<Medicine>();
+		Medicine medicine = null;
 		Connection con = (Connection) DBConnection.getConnection();
 		String query = "SELECT medicine_issued.medicine_id,medicine_master.medicine_name,medicine_issued.quantity_issued,medicine_master.price FROM medicine_master INNER JOIN medicine_issued ON medicine_master.medicine_id = medicine_issued.medicine_id WHERE patient_id=?;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 		ps.setLong(1, patient_id);
-		ResultSet rs = ps.executeQuery();		
-		while(rs.next()) {
-			medicine=new Medicine();
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			medicine = new Medicine();
 			medicine.setMedicineId(rs.getInt(1));
 			medicine.setMedicineName(rs.getString(2));
 			medicine.setQuantityIssued(rs.getInt(3));
@@ -176,5 +176,54 @@ public class HospitalDAO {
 		DBConnection.closeConnection();
 		rs.close();
 		return medicines;
+	}
+
+	public List<Medicine> getAllMedicines() throws Exception {
+		List<Medicine> medicines = new ArrayList<Medicine>();
+		Medicine medicine = null;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT medicine_id,medicine_name,price FROM medicine_master; ";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();		
+		while (rs.next()) {
+			medicine = new Medicine();
+			medicine.setMedicineId(rs.getInt(1));
+			medicine.setMedicineName(rs.getString(2));
+			medicine.setMedicinePrice(rs.getFloat(3));
+			medicines.add(medicine);
+		}
+		DBConnection.closeConnection();
+		rs.close();
+		return medicines;
+	}
+
+	public int checkAvailability(int medicineId) throws Exception {
+		int Quantity = 0;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT quantity_available FROM medicine_master WHERE medicine_id =?;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setLong(1, medicineId);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			Quantity = rs.getInt(1);
+		}
+		return Quantity;
+	}
+
+	public boolean addMedicine(Long patient_id, int medicineId, int reqQuantity) throws Exception {
+		int row = 0;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "call add_medicine(?,?,?);";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setLong(1, patient_id);
+		ps.setInt(2, medicineId);
+		ps.setInt(3, reqQuantity);
+		row = ps.executeUpdate();
+		DBConnection.closeConnection();
+		ps.close();
+		if (row == 0)
+			return false;
+		return true;
+
 	}
 }
