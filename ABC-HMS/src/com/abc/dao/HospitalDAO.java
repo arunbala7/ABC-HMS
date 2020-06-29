@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.Connection;
+import com.abc.beans.Medicine;
 import com.abc.beans.Patient;
 import com.abc.beans.User;
 import com.abc.utils.DBConnection;
@@ -154,5 +155,10 @@ public class HospitalDAO {
 		DBConnection.closeConnection();
 		ps.close();
 		return rows;
+	}
+
+	public List<Medicine> getAllMedicinesIssued(Long patient_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
