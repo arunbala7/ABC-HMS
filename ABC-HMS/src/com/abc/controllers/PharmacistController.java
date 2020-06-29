@@ -68,7 +68,7 @@ public class PharmacistController extends HttpServlet {
 				if (actionType.contentEquals("find")) {
 					Patient patient = null;
 					List<Medicine> medicines_issued = null;
-					
+
 					patient = PharmacistServices.getPatient(patient_id);
 					if (patient != null) {
 						medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);
@@ -80,8 +80,11 @@ public class PharmacistController extends HttpServlet {
 					}
 					rd = request.getRequestDispatcher("pharmacistJSPs/issueMedicines.jsp");
 					rd.forward(request, response);
-				} else {
-
+				} else if (actionType.contentEquals("get")) {
+					List<Medicine> availableMedicines = null;
+					availableMedicines = PharmacistServices.getAllMedicines();
+					HttpSession session = request.getSession();
+					session.setAttribute("availableMedicines", availableMedicines);
 				}
 
 			} catch (Exception e) {

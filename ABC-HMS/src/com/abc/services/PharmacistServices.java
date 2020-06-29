@@ -20,4 +20,9 @@ public class PharmacistServices {
 		
 	}
 
+	public static List<Medicine> getAllMedicines() throws Exception{
+		HospitalDAO dao = new HospitalDAO();
+		return dao.getAllMedicines();
+	}
+
 }
