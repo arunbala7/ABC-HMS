@@ -297,4 +297,20 @@ public class HospitalDAO {
 			return false;
 		return true;
 	}
+
+	public boolean updateStatus(Long patient_id) throws Exception {
+		int row = 0;
+		System.out.println("hi");
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "UPDATE patient SET patient_date_of_discharge=CURDATE(), patient_status=? WHERE patient_id=?;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setString(1, "DISCHARGED");
+		ps.setLong(2, patient_id);
+		row = ps.executeUpdate();
+		DBConnection.closeConnection();
+		ps.close();
+		if (row == 1)
+			return true;
+		return false;
+	}
 }

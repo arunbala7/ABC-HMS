@@ -30,25 +30,18 @@
 			if (msg == "success") {
 				swal({
 					title : "Success",
-					text : "Diagnostic Added Successfully",
+					text : "Patient Billing Confirmed!",
 					icon : "success",
 					button : "Okay",
 				})
 			} else if (msg == "failed") {
 				swal({
 					title : "Failed",
-					text : "Diagnostic Not Added, Please Try Again!",
+					text : "Patient Billing Not Confirmed, Please Try Again!",
 					icon : "error",
 					button : "Okay",
 				});
-			} else {
-				swal({
-					title : "Failed",
-					text : "Patient already taken the Test",
-					icon : "warning",
-					button : "Okay",
-				});
-			}
+			} 
 		}
 		
 		
@@ -265,7 +258,7 @@
 					<div class="col-md-12  text-center p-t-20 p-b-20">
 						<button class="btn btn-primary active" id="cancel">Cancel</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<c:if test="${patient.getStatus() == 'ACTIVE'}"> 
+						<c:if test="${patient.getStatus() == 'ACTIVE'}">
 							<button type="submit" form="patientForm"
 								class="btn btn-primary active" id="confirm">Confirm</button>
 						</c:if>

@@ -261,17 +261,18 @@ public class AdminDeskController extends HttpServlet {
 					} else {
 						request.setAttribute("actionType", "error");
 					}
-					rd = request.getRequestDispatcher("admindeskJSPs/finalBilling.jsp");
-					rd.forward(request, response);
-				}else {
+
+				} else {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
-					if(AdminDeskService.updateStatus(patient_id)) {
-						request.setAttribute("msg","success");
-					}else {
-						request.setAttribute("msg","faild");
+					if (AdminDeskService.updateStatus(patient_id)) {
+						request.setAttribute("msg", "success");
+					} else {
+						request.setAttribute("msg", "failed");
 					}
-					
 				}
+				rd = request.getRequestDispatcher("admindeskJSPs/finalBilling.jsp");
+				rd.forward(request, response);
+
 			} catch (Exception e) {
 			}
 			break;

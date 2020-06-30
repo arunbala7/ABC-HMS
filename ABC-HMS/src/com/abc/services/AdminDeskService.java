@@ -61,10 +61,10 @@ public class AdminDeskService {
 
 		long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
 		long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-		return (int) diff;
+		return (int) diff+1;
 	}
 
-	public static boolean updateStatus(Long patient_id) throws ParseException {
+	public static boolean updateStatus(Long patient_id) throws Exception {
 		HospitalDAO dao = new HospitalDAO();
 		return dao.updateStatus(patient_id);
 	}
