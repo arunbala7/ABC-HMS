@@ -69,10 +69,6 @@ public class PharmacistController extends HttpServlet {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					Patient patient = null;
 					List<Medicine> medicines_issued = null;
-					if (request.getParameter("msg") != null) {
-						String msg = (String) request.getParameter("msg");
-						request.setAttribute("msg", msg);
-					}
 					patient = PharmacistServices.getPatient(patient_id);
 					if (patient != null) {
 						medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);
@@ -108,10 +104,7 @@ public class PharmacistController extends HttpServlet {
 					}
 					Patient patient = null;
 					List<Medicine> medicines_issued = null;
-					if (request.getParameter("msg") != null) {
-						String msg = (String) request.getParameter("msg");
-						request.setAttribute("msg", msg);
-					}
+			
 					patient = PharmacistServices.getPatient(patient_id);
 					if (patient != null) {
 						medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);

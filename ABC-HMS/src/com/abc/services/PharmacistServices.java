@@ -3,6 +3,7 @@ package com.abc.services;
 import java.util.List;
 
 import com.abc.beans.Patient;
+import com.abc.beans.Test;
 import com.abc.beans.Medicine;
 import com.abc.dao.HospitalDAO;
 
@@ -35,5 +36,7 @@ public class PharmacistServices {
 		HospitalDAO dao = new HospitalDAO();
 		return dao.addMedicine(patient_id,medicineId,reqQuantity);
 	}
+
+
 
 }
