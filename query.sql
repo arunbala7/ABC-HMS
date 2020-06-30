@@ -47,3 +47,6 @@ SELECT diagnostics_master.test_id,diagnostics_master.test_name,diagnostics_maste
 FROM diagnostics_master
 INNER JOIN diagnostics_conducted
 ON diagnostics_master.test_id = diagnostics_conducted.test_id WHERE patient_id=?; ->patient_id
+-----------------------------------------
+addTest (patient_id, test_id)
+INSERT INTO diagnostics_conducted (patient_id, test_id) VALUES ('?', '?'); -> patient_id, test_id
