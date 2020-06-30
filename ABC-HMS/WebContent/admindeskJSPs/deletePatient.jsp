@@ -277,14 +277,10 @@ $(document).ready(function() {
 
 				<div style="display: none;"
 					class="wrap-input100 validate-input m-b-23 before-id"
-					data-validate="Select a valid room Type" id="div2">
-					<span class="label-input100 ">Type Of Room</span> <select
-						id="type_of_room" name="type_of_room"
-						class="input100 form-control">
-						<option value="Single Room" selected>Single Room</option>
-						<option value="Semi-Sharing">Semi-Sharing</option>
-						<option value="General Ward">General Ward</option>
-					</select> <span class="focus-input100"></span>
+					data-validate="Select a valid room Type">
+					<span class="label-input100 ">Type Of Room</span> <input
+						class="input100 form-control" type="text" id="type_of_room"
+						name="type_of_room" /> <span class="focus-input100"></span>
 				</div>
 
 
