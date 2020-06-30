@@ -3,10 +3,10 @@ USE `abc_hospitals`;
 
 -- ccreates user table 
 CREATE TABLE userstore(
-user_id INT AUTO_INCREMENT NOT NULL,
-user_name VARCHAR(20) NOT NULL,
-user_password VARCHAR(20) NOT NULL,
-work_group VARCHAR(20) NOT NULL,
+user_id INT AUTO_INCREMENT,
+user_name VARCHAR(20),
+user_password VARCHAR(20),
+work_group VARCHAR(20),
 login_time DATETIME DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY(user_id)
 );
@@ -24,7 +24,7 @@ patient_SSN BIGINT UNIQUE,
 patient_id BIGINT AUTO_INCREMENT,
 patient_name VARCHAR(30),
 patient_age INT,
-patient_date_of_admission DATETIME DEFAULT CURRENT_TIMESTAMP,
+patient_date_of_admission DATE,
 type_of_room VARCHAR(20),
 address VARCHAR(100),
 city VARCHAR(20),
