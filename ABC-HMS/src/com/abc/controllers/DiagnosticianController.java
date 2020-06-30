@@ -51,7 +51,22 @@ public class DiagnosticianController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		RequestDispatcher rd;
+		String action = "";
+		action = request.getParameter("action");
+		switch (action) {
+		case "addDiagnostic":
+			try {
 
+			} catch (Exception e) {
+			}
+			break;
+
+		default:
+			rd = request.getRequestDispatcher("Dashboard.jsp");
+			rd.forward(request, response);
+			break;
+		}
 	}
 
 }
