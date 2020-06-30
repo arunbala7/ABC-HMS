@@ -224,10 +224,12 @@
 
 						</table>
 					</div>
+					<c:if test="${patient.getStatus() == 'ACTIVE'}"> 
 					<div class="d-flex justify-content-center after">
 						<button class="btn btn-primary active after" id="issue">Issue
 							Medicines</button>
 					</div>
+					</c:if>
 					<br>
 					<form style="display: none;" autocomplete="off"
 						class="login100-form validate-form before" id="patientForm"

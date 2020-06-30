@@ -266,6 +266,7 @@ public class AdminDeskController extends HttpServlet {
 				}else {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					
+					
 				}
 			} catch (Exception e) {
 			}

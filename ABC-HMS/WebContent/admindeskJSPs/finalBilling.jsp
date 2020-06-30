@@ -185,7 +185,7 @@
 										${patient.getState()}</td>
 									<td>${patient.getPatient_date_of_admission()}</td>
 									<td>${patient.getType_of_room()}</td>
-									<td>${patient.getStatus() }</td>
+									<td>${patient.getStatus()}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -254,17 +254,21 @@
 							</tbody>
 						</table>
 						<div class="text-right p-r-250">
-							<strong>Bill for Diagnostics: Rs.${testAmount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+							<strong>Bill for Diagnostics:
+								Rs.${testAmount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
 						</div>
-					</div>	
-					<div class="d-flex justify-content-center  p-t-40" style="font-size: 20px;">
-							<strong>Grand Total: Rs.${grandTotal}</strong>
-						</div>				
+					</div>
+					<div class="d-flex justify-content-center  p-t-40"
+						style="font-size: 20px;">
+						<strong>Grand Total: Rs.${grandTotal}</strong>
+					</div>
 					<div class="col-md-12  text-center p-t-20 p-b-20">
 						<button class="btn btn-primary active" id="cancel">Cancel</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="submit" form="patientForm"
-							class="btn btn-primary active" id="confirm">Confirm</button>
+						<c:if test="${patient.getStatus() == 'ACTIVE'}"> 
+							<button type="submit" form="patientForm"
+								class="btn btn-primary active" id="confirm">Confirm</button>
+						</c:if>
 					</div>
 					<form autocomplete="off" class="login100-form validate-form before"
 						id="patientForm" action="AdminDeskController" method="post">
