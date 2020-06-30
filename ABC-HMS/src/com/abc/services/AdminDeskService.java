@@ -51,48 +51,53 @@ public class AdminDeskService {
 	}
 
 	public static int calculateDays(String patient_date_of_admission) throws ParseException {
-		String[] date=patient_date_of_admission.split("-");
-		String d=date[0]+'/'+date[1]+'/'+date[2];
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
-		   LocalDateTime now = LocalDateTime.now(); 
-		   SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
-		    Date firstDate = sdf.parse(d);
-		    Date secondDate = sdf.parse(dtf.format(now));
-		 
-		    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-		    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS); 
-		return (int)diff;
+		String[] date = patient_date_of_admission.split("-");
+		String d = date[0] + '/' + date[1] + '/' + date[2];
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDateTime now = LocalDateTime.now();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+		Date firstDate = sdf.parse(d);
+		Date secondDate = sdf.parse(dtf.format(now));
+
+		long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+		long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+		return (int) diff;
+	}
+
+	public static boolean updateStatus(Long patient_id) throws ParseException {
+		HospitalDAO dao = new HospitalDAO();
+		return dao.updateStatus(patient_id);
 	}
 
 	public static long calculateRoom(int numberOfDays, String type_of_room) {
-		int price=0;
-		switch(type_of_room) {
+		int price = 0;
+		switch (type_of_room) {
 		case "General Ward":
-			price=2000;
+			price = 2000;
 			break;
 		case "Semi-Sharing":
-			price=4000;
+			price = 4000;
 			break;
 		case "Single Room":
-			price=8000;
+			price = 8000;
 			break;
 		}
-		return (long)numberOfDays*price;
+		return (long) numberOfDays * price;
 	}
 
 	public static float calculateMedicine(List<Medicine> medicines) {
-		float amount=0;
-		for(Medicine m:medicines) {
-			amount=(float) (amount+m.getMedicinePrice()*m.getQuantityIssued());
-		}		
+		float amount = 0;
+		for (Medicine m : medicines) {
+			amount = (float) (amount + m.getMedicinePrice() * m.getQuantityIssued());
+		}
 		return amount;
 	}
 
 	public static long calculateTest(List<Test> tests) {
-		long amount=0;
-		for(Test t:tests) {
-			amount=(long) (amount+t.getTest_charges());
-		}	
+		long amount = 0;
+		for (Test t : tests) {
+			amount = (long) (amount + t.getTest_charges());
+		}
 		return amount;
 	}
 

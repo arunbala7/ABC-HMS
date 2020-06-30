@@ -265,7 +265,11 @@ public class AdminDeskController extends HttpServlet {
 					rd.forward(request, response);
 				}else {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
-					
+					if(AdminDeskService.updateStatus(patient_id)) {
+						request.setAttribute("msg","success");
+					}else {
+						request.setAttribute("msg","faild");
+					}
 					
 				}
 			} catch (Exception e) {
