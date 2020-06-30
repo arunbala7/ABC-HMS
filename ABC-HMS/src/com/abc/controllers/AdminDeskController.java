@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.beans.Medicine;
 import com.abc.beans.Patient;
+import com.abc.beans.Test;
 import com.abc.beans.User;
 import com.abc.services.AdminDeskService;
+import com.abc.services.DiagnosticianService;
+import com.abc.services.PharmacistServices;
 import com.google.gson.Gson;
 
 @WebServlet(description = "admin desk controller", urlPatterns = { "/AdminDeskController" })
@@ -228,8 +232,41 @@ public class AdminDeskController extends HttpServlet {
 			break;
 
 		case "finalBilling":
-			rd = request.getRequestDispatcher("admindeskJSPs/finalBilling.jsp");
-			rd.forward(request, response);
+			try {
+				String actionType = "";
+				actionType = (String) request.getParameter("actionType");
+
+				if (actionType.contentEquals("find")) {
+					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
+					Patient patient = null;
+					List<Test> tests = null;
+					List<Medicine> medicines_issued = null;
+					patient = DiagnosticianService.getPatient(patient_id);
+					if (patient != null) {
+						tests = DiagnosticianService.getAllTests(patient_id);
+						medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);
+						request.setAttribute("actionType", "show");
+						request.setAttribute("patient", patient);
+						request.setAttribute("tests", tests);
+						request.setAttribute("medicines", medicines_issued);
+						int numberOfDays = AdminDeskService.calculateDays(patient.getPatient_date_of_admission());
+						long roomAmout = AdminDeskService.calculateRoom(numberOfDays, patient.getType_of_room());
+						long medicineAmount = AdminDeskService.calculateMedicine(medicines_issued);
+						long testAmount = AdminDeskService.calculateTest(tests);
+						long grandTotal = roomAmout + medicineAmount + testAmount;
+						request.setAttribute("numberOfDays", numberOfDays);
+						request.setAttribute("roomAmout", roomAmout);
+						request.setAttribute("medicineAmount", medicineAmount);
+						request.setAttribute("testAmount", testAmount);
+						request.setAttribute("grandTotal", grandTotal);
+					} else {
+						request.setAttribute("actionType", "error");
+					}
+					rd = request.getRequestDispatcher("admindeskJSPs/finalBilling.jsp");
+					rd.forward(request, response);
+				}
+			} catch (Exception e) {
+			}
 			break;
 		default:
 			rd = request.getRequestDispatcher("Dashboard.jsp");
