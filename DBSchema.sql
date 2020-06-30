@@ -1,6 +1,6 @@
 CREATE SCHEMA abc_hospitals;
 USE `abc_hospitals`;
-
+ 
 -- ccreates user table 
 CREATE TABLE userstore(
 user_id INT AUTO_INCREMENT,
