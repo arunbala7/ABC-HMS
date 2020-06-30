@@ -40,7 +40,7 @@ public class HospitalDAO {
 		ResultSet rs = ps.executeQuery();
 		if (rs.next())
 			return null;
-		query = "INSERT INTO patient(patient_SSN,patient_name, patient_age, type_of_room, address, city, state) VALUES (?, ?, ?, ?, ?, ?, ?);";
+		query = "INSERT INTO patient(patient_SSN,patient_name, patient_age, type_of_room, address, city, state, patient_date_of_admission) VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE());";
 		ps = (PreparedStatement) con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		ps.setLong(1, patient.getPatient_SSN());
 		ps.setString(2, patient.getPatient_name());
