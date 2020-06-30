@@ -102,7 +102,6 @@ public class AdminDeskController extends HttpServlet {
 		RequestDispatcher rd;
 		String action = "";
 		action = request.getParameter("action");
-
 		switch (action) {
 		case "createPatient":
 			try {
@@ -235,8 +234,8 @@ public class AdminDeskController extends HttpServlet {
 			try {
 				String actionType = "";
 				actionType = (String) request.getParameter("actionType");
-
 				if (actionType.contentEquals("find")) {
+
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					Patient patient = null;
 					List<Test> tests = null;
@@ -251,9 +250,9 @@ public class AdminDeskController extends HttpServlet {
 						request.setAttribute("medicines", medicines_issued);
 						int numberOfDays = AdminDeskService.calculateDays(patient.getPatient_date_of_admission());
 						long roomAmout = AdminDeskService.calculateRoom(numberOfDays, patient.getType_of_room());
-						long medicineAmount = AdminDeskService.calculateMedicine(medicines_issued);
+						float medicineAmount = AdminDeskService.calculateMedicine(medicines_issued);
 						long testAmount = AdminDeskService.calculateTest(tests);
-						long grandTotal = roomAmout + medicineAmount + testAmount;
+						float grandTotal = roomAmout + medicineAmount + testAmount;
 						request.setAttribute("numberOfDays", numberOfDays);
 						request.setAttribute("roomAmout", roomAmout);
 						request.setAttribute("medicineAmount", medicineAmount);

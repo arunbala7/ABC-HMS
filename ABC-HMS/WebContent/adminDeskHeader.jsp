@@ -83,7 +83,7 @@
 						data-toggle="dropdown"
 						style="background-color: #222831; border: 2px solid #222831;">Patient Billing</button>
 					<div class="dropdown-menu" style="background-color: #dddddd">
-						<a href="AdminDeskController?action=findBilling"
+						<a href="AdminDeskController?action=finalBilling"
 							class="dropdown-item  btn btn-outline-light">Final Billing</a>
 					</div>
 				</div>

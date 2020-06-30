@@ -214,7 +214,7 @@
 									<tr>
 										<td>${test.getTest_id()}</td>
 										<td>${test.getTest_name()}</td>
-										<td>${test.getTest_charges()}</td>
+										<td>Rs.${test.getTest_charges()}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
