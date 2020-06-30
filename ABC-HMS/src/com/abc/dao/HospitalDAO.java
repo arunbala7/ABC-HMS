@@ -286,7 +286,7 @@ public class HospitalDAO {
 	public boolean addTest(Long patient_id, int test_id) throws Exception {
 		int row = 0;
 		Connection con = (Connection) DBConnection.getConnection();
-		String query = "INSERT INTO diagnostics_conducted (patient_id, test_id) VALUES ('?', '?');";
+		String query = "INSERT INTO diagnostics_conducted (patient_id, test_id) VALUES (?, ?);";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 		ps.setLong(1, patient_id);
 		ps.setInt(2, test_id);
