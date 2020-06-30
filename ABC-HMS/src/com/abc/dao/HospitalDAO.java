@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.abc.beans.Medicine;
 import com.abc.beans.Patient;
+import com.abc.beans.Test;
 import com.abc.beans.User;
 import com.abc.utils.DBConnection;
 import com.mysql.jdbc.Connection;
@@ -225,5 +226,75 @@ public class HospitalDAO {
 			return false;
 		return true;
 
+	}
+
+	public List<Test> getAllTests(Long patient_id) throws Exception {
+		List<Test> tests = new ArrayList<Test>();
+		Test test = null;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT diagnostics_master.test_id,diagnostics_master.test_name,diagnostics_master.test_charge FROM diagnostics_master INNER JOIN diagnostics_conducted ON diagnostics_master.test_id = diagnostics_conducted.test_id WHERE patient_id=?;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setLong(1, patient_id);
+		ResultSet rs = ps.executeQuery();		
+		while (rs.next()) {
+			test = new Test();
+			test.setTest_id(rs.getInt(1));
+			test.setTest_name(rs.getString(2));
+			test.setTest_charges(rs.getInt(3));
+			tests.add(test);
+		}
+		DBConnection.closeConnection();
+		rs.close();
+		return tests;
+	}
+
+	public List<Test> getAllAvailableTests() throws Exception {
+		List<Test> tests = new ArrayList<Test>();
+		Test test = null;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT * FROM diagnostics_master;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();		
+		while (rs.next()) {
+			test = new Test();
+			test.setTest_id(rs.getInt(1));
+			test.setTest_name(rs.getString(2));
+			test.setTest_charges(rs.getInt(3));
+			tests.add(test);
+		}
+		DBConnection.closeConnection();
+		rs.close();
+		return tests;
+	}
+
+	public boolean checkAlreadyTested(Long patient_id, int test_id) throws Exception {
+		boolean check=false;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "SELECT test_id FROM diagnostics_conducted WHERE patient_id=? AND test_id=?;";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setLong(1, patient_id);
+		ps.setInt(2, test_id);
+		ResultSet rs = ps.executeQuery();		
+		if(rs.next()) {
+			check=true;
+		}
+		DBConnection.closeConnection();
+		rs.close();
+		return check;
+	}
+
+	public boolean addTest(Long patient_id, int test_id) throws Exception {
+		int row = 0;
+		Connection con = (Connection) DBConnection.getConnection();
+		String query = "INSERT INTO diagnostics_conducted (patient_id, test_id) VALUES ('?', '?');";
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
+		ps.setLong(1, patient_id);
+		ps.setInt(2, test_id);
+		row = ps.executeUpdate();
+		DBConnection.closeConnection();
+		ps.close();
+		if (row == 0)
+			return false;
+		return true;
 	}
 }

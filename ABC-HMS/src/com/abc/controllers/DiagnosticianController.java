@@ -88,7 +88,6 @@ public class DiagnosticianController extends HttpServlet {
 				} else if (actionType.contentEquals("check")) {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					int test_id = Integer.parseInt(request.getParameter("test_id"));
-
 					if (!DiagnosticianService.checkAlreadyTested(patient_id, test_id)) {
 						if (DiagnosticianService.addTest(patient_id, test_id)) {
 							request.setAttribute("msg", "success");
