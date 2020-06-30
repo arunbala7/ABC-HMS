@@ -42,5 +42,8 @@ SELECT quantity_available FROM medicine_master WHERE medicine_id =?; -> medicine
 addMedicine
 call add_medicine(?,?,?); -> patient id , medicine id, quantity to issue
 ------------------------------------------
-getAllTests (patient_id)
-SELECT * FROM diagnostics_conducted WHERE patient_id = ?; -> patient_id
+getAllTests (patient_id) 
+SELECT diagnostics_master.test_id,diagnostics_master.test_name,diagnostics_master.test_charge 
+FROM diagnostics_master
+INNER JOIN diagnostics_conducted
+ON diagnostics_master.test_id = diagnostics_conducted.test_id WHERE patient_id=?; ->patient_id
