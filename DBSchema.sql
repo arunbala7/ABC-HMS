@@ -89,6 +89,7 @@ ON DELETE CASCADE,
 FOREIGN KEY (test_id) REFERENCES diagnostics_master(test_id)
 ON UPDATE CASCADE
 );
+ALTER TABLE diagnostics_conducted AUTO_INCREMENT = 50000;
 
 -- Procedure to check if user exists if yes return that record else return oops 
 -- check if userexist 
