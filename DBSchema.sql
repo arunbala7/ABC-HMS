@@ -5,7 +5,7 @@ USE `abc_hospitals`;
 CREATE TABLE userstore(
 user_id INT AUTO_INCREMENT,
 user_name VARCHAR(20),
-user_password VARCHAR(20),
+user_password VARCHAR(20), 
 work_group VARCHAR(20),
 login_time DATETIME DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY(user_id)
@@ -30,6 +30,7 @@ address VARCHAR(100),
 city VARCHAR(20),
 state VARCHAR(20),
 patient_status VARCHAR(20) DEFAULT 'ACTIVE',
+patient_date_of_discharge DATE,
 PRIMARY KEY (patient_id)
 );
 ALTER TABLE patient AUTO_INCREMENT = 200000000;

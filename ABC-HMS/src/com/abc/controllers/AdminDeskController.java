@@ -77,8 +77,8 @@ public class AdminDeskController extends HttpServlet {
 			rd.forward(request, response);
 			break;
 
-		case "findBilling":
-			rd = request.getRequestDispatcher("admindeskJSPs/findBilling.jsp");
+		case "finalBilling":
+			rd = request.getRequestDispatcher("admindeskJSPs/finalBilling.jsp");
 			rd.forward(request, response);
 			break;
 		case "about":
@@ -227,8 +227,8 @@ public class AdminDeskController extends HttpServlet {
 			}
 			break;
 
-		case "findBilling":
-			rd = request.getRequestDispatcher("admindeskJSPs/findBilling.jsp");
+		case "finalBilling":
+			rd = request.getRequestDispatcher("admindeskJSPs/finalBilling.jsp");
 			rd.forward(request, response);
 			break;
 		default:
