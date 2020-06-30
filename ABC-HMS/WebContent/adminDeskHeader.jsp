@@ -52,7 +52,7 @@
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary dropdown-toggle"
 						data-toggle="dropdown"
-						style="background-color: #222831; border: 2px solid #222831;">Manage Patient Details</button>
+						style="background-color: #222831; border: 2px solid #222831;">Manage Patient Information</button>
 					<div class="dropdown-menu" style="background-color: #dddddd;">
 						<a href="AdminDeskController?action=createPatient"
 							class="dropdown-item btn btn-outline-light">Create Patient</a>
@@ -64,7 +64,7 @@
 							class="dropdown-item btn btn-outline-light">Delete Patient</a>
 						<div class="dropdown-divider"></div>
 						<a href="AdminDeskController?action=viewAllPatients&currentPage=1"
-							class="dropdown-item btn btn-outline-light">View All Patients</a>
+							class="dropdown-item btn btn-outline-light">View All Active Patients</a>
 					</div>
 				</div>
 

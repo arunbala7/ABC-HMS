@@ -52,10 +52,10 @@
 					<button type="button" class="btn btn-primary dropdown-toggle"
 						data-toggle="dropdown"
 						style="background-color: #222831; border: 2px solid #222831;">Manage
-						Pharmacy Details</button>
+						Diagnostics Details</button>
 					<div class="dropdown-menu" style="background-color: #dddddd;">
-						<a href="DiagnosticianController?action=issueMedicines"
-							class="dropdown-item btn btn-outline-light">Issue Medicines</a>
+						<a href="DiagnosticianController?action=addDiagnostic"
+							class="dropdown-item btn btn-outline-light">Add Diagnostic Test</a>
 					</div>
 				</div>
 
