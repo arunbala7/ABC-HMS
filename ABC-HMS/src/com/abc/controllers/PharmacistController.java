@@ -104,7 +104,7 @@ public class PharmacistController extends HttpServlet {
 					}
 					Patient patient = null;
 					List<Medicine> medicines_issued = null;
-			
+
 					patient = PharmacistServices.getPatient(patient_id);
 					if (patient != null) {
 						medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);

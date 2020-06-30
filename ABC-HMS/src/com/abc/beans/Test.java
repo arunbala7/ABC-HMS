@@ -1,11 +1,11 @@
 package com.abc.beans;
 
 public class Test {
-	
+
 	private long patient_id;
-	private int test_id,test_charges;
+	private int test_id, test_charges;
 	private String test_name;
-	
+
 	@Override
 	public String toString() {
 		return "Test [patient_id=" + patient_id + ", test_id=" + test_id + ", test_charges=" + test_charges
@@ -15,7 +15,6 @@ public class Test {
 	public long getPatient_id() {
 		return patient_id;
 	}
-
 
 	public void setPatient_id(long patient_id) {
 		this.patient_id = patient_id;
@@ -44,7 +43,5 @@ public class Test {
 	public void setTest_name(String test_name) {
 		this.test_name = test_name;
 	}
-	
-	
 
 }

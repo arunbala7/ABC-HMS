@@ -262,6 +262,12 @@
 							<button type="submit" form="patientForm"
 								class="btn btn-primary active" id="confirm">Confirm</button>
 						</c:if>
+						<c:if test="${patient.getStatus() != 'ACTIVE'}">
+							<div class="d-flex justify-content-center after"
+								style="font-size: 25px;">
+								<strong>***Patient Discharged***</strong>
+							</div>
+						</c:if>
 					</div>
 					<form autocomplete="off" class="login100-form validate-form before"
 						id="patientForm" action="AdminDeskController" method="post">

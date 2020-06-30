@@ -280,7 +280,8 @@ $(document).ready(function() {
 				</div>
 
 
-				<div style="display: none;" class="wrap-input100 validate-input m-b-23 before-id"
+				<div style="display: none;"
+					class="wrap-input100 validate-input m-b-23 before-id"
 					data-validate="Enter a Valid Address">
 					<span class="label-input100">Address</span>
 					<textarea name="address" id="address" class="input100 form-control"

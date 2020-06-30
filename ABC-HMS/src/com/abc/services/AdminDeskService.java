@@ -61,7 +61,7 @@ public class AdminDeskService {
 
 		long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
 		long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-		return (int) diff+1;
+		return (int) diff + 1;
 	}
 
 	public static boolean updateStatus(Long patient_id) throws Exception {

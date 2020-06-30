@@ -267,6 +267,31 @@ public class AdminDeskController extends HttpServlet {
 					if (AdminDeskService.updateStatus(patient_id)) {
 						request.setAttribute("msg", "success");
 					} else {
+						request.setAttribute("actionType", "show");
+						Patient patient = null;
+						List<Test> tests = null;
+						List<Medicine> medicines_issued = null;
+						patient = DiagnosticianService.getPatient(patient_id);
+						if (patient != null) {
+							tests = DiagnosticianService.getAllTests(patient_id);
+							medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);
+							request.setAttribute("actionType", "show");
+							request.setAttribute("patient", patient);
+							request.setAttribute("tests", tests);
+							request.setAttribute("medicines", medicines_issued);
+							int numberOfDays = AdminDeskService.calculateDays(patient.getPatient_date_of_admission());
+							long roomAmout = AdminDeskService.calculateRoom(numberOfDays, patient.getType_of_room());
+							float medicineAmount = AdminDeskService.calculateMedicine(medicines_issued);
+							long testAmount = AdminDeskService.calculateTest(tests);
+							float grandTotal = roomAmout + medicineAmount + testAmount;
+							request.setAttribute("numberOfDays", numberOfDays);
+							request.setAttribute("roomAmout", roomAmout);
+							request.setAttribute("medicineAmount", medicineAmount);
+							request.setAttribute("testAmount", testAmount);
+							request.setAttribute("grandTotal", grandTotal);
+						} else {
+							request.setAttribute("actionType", "error");
+						}
 						request.setAttribute("msg", "failed");
 					}
 				}

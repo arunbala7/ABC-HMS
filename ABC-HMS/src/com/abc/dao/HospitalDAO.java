@@ -185,7 +185,7 @@ public class HospitalDAO {
 		Connection con = (Connection) DBConnection.getConnection();
 		String query = "SELECT medicine_id,medicine_name,price FROM medicine_master; ";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
-		ResultSet rs = ps.executeQuery();		
+		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			medicine = new Medicine();
 			medicine.setMedicineId(rs.getInt(1));
@@ -235,7 +235,7 @@ public class HospitalDAO {
 		String query = "SELECT diagnostics_master.test_id,diagnostics_master.test_name,diagnostics_master.test_charge FROM diagnostics_master INNER JOIN diagnostics_conducted ON diagnostics_master.test_id = diagnostics_conducted.test_id WHERE patient_id=?;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 		ps.setLong(1, patient_id);
-		ResultSet rs = ps.executeQuery();		
+		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			test = new Test();
 			test.setTest_id(rs.getInt(1));
@@ -254,7 +254,7 @@ public class HospitalDAO {
 		Connection con = (Connection) DBConnection.getConnection();
 		String query = "SELECT * FROM diagnostics_master;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
-		ResultSet rs = ps.executeQuery();		
+		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			test = new Test();
 			test.setTest_id(rs.getInt(1));
@@ -268,15 +268,15 @@ public class HospitalDAO {
 	}
 
 	public boolean checkAlreadyTested(Long patient_id, int test_id) throws Exception {
-		boolean check=false;
+		boolean check = false;
 		Connection con = (Connection) DBConnection.getConnection();
 		String query = "SELECT test_id FROM diagnostics_conducted WHERE patient_id=? AND test_id=?;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 		ps.setLong(1, patient_id);
 		ps.setInt(2, test_id);
-		ResultSet rs = ps.executeQuery();		
-		if(rs.next()) {
-			check=true;
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			check = true;
 		}
 		DBConnection.closeConnection();
 		rs.close();
@@ -300,7 +300,6 @@ public class HospitalDAO {
 
 	public boolean updateStatus(Long patient_id) throws Exception {
 		int row = 0;
-		System.out.println("hi");
 		Connection con = (Connection) DBConnection.getConnection();
 		String query = "UPDATE patient SET patient_date_of_discharge=CURDATE(), patient_status=? WHERE patient_id=?;";
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);

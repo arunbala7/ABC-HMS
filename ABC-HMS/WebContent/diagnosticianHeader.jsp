@@ -55,7 +55,8 @@
 						Diagnostics Details</button>
 					<div class="dropdown-menu" style="background-color: #dddddd;">
 						<a href="DiagnosticianController?action=addDiagnostic"
-							class="dropdown-item btn btn-outline-light">Add Diagnostic Test</a>
+							class="dropdown-item btn btn-outline-light">Add Diagnostic
+							Test</a>
 					</div>
 				</div>
 
