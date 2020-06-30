@@ -84,7 +84,7 @@
 						style="background-color: #222831; border: 2px solid #222831;">Patient Billing</button>
 					<div class="dropdown-menu" style="background-color: #dddddd">
 						<a href="AdminDeskController?action=findBilling"
-							class="dropdown-item  btn btn-outline-light">Find Billing</a>
+							class="dropdown-item  btn btn-outline-light">Final Billing</a>
 					</div>
 				</div>
 				<div class="navbar-nav btn-group">
