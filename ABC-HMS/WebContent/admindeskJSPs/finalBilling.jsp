@@ -256,7 +256,7 @@
 						<strong>Grand Total: Rs.${grandTotal}</strong>
 					</div>
 					<div class="col-md-12  text-center p-t-20 p-b-20">
-						<button class="btn btn-primary active" id="cancel">Cancel</button>
+						<button class="btn btn-primary active" id="cancel">Back</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:if test="${patient.getStatus() == 'ACTIVE'}">
 							<button type="submit" form="patientForm"
