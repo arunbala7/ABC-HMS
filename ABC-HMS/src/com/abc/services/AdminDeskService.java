@@ -65,8 +65,19 @@ public class AdminDeskService {
 	}
 
 	public static long calculateRoom(int numberOfDays, String type_of_room) {
-		// TODO Auto-generated method stub
-		return 0;
+		int price=0;
+		switch(type_of_room) {
+		case "General Ward":
+			price=2000;
+			break;
+		case "Semi-Sharing":
+			price=4000;
+			break;
+		case "Single Room":
+			price=8000;
+			break;
+		}
+		return (long)numberOfDays*price;
 	}
 
 	public static float calculateMedicine(List<Medicine> medicines) {

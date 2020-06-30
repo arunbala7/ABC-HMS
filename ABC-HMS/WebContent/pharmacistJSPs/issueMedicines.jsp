@@ -216,7 +216,7 @@
 										<td>${medicine.getMedicineId()}</td>
 										<td>${medicine.getMedicineName()}</td>
 										<td>${medicine.getQuantityIssued()}</td>
-										<td>${medicine.getMedicinePrice()}</td>
+										<td>Rs.${medicine.getMedicinePrice()}</td>
 										<td>Rs.${medicine.getQuantityIssued() * medicine.getMedicinePrice()}</td>
 									</tr>
 								</c:forEach>

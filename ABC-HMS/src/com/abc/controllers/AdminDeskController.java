@@ -263,6 +263,9 @@ public class AdminDeskController extends HttpServlet {
 					}
 					rd = request.getRequestDispatcher("admindeskJSPs/finalBilling.jsp");
 					rd.forward(request, response);
+				}else {
+					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
+					
 				}
 			} catch (Exception e) {
 			}

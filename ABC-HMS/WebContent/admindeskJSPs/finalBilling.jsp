@@ -189,7 +189,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="text-right p-r-30">
+						<div class="text-right p-r-50">
 							<strong>Number of Days:
 								${numberOfDays}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bill
 								for Room: Rs.${roomAmout}</strong>
