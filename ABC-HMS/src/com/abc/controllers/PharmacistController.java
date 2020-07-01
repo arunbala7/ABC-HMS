@@ -15,6 +15,7 @@ import com.abc.beans.Patient;
 import com.abc.beans.User;
 import com.abc.beans.Medicine;
 import com.abc.services.PharmacistServices;
+import com.abc.utils.DateFormat;
 
 @WebServlet(description = "pharmacist request reseiver", urlPatterns = { "/PharmacistController" })
 public class PharmacistController extends HttpServlet {
@@ -73,7 +74,6 @@ public class PharmacistController extends HttpServlet {
 					if (patient != null) {
 						medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);
 						request.setAttribute("actionType", "show");
-						request.setAttribute("patient", patient);
 						request.setAttribute("medicines", medicines_issued);
 						HttpSession session = request.getSession();
 						if (session.getAttribute("availableMedicines") == null) {
@@ -81,6 +81,8 @@ public class PharmacistController extends HttpServlet {
 							availableMedicines = PharmacistServices.getAllMedicines();
 							session.setAttribute("availableMedicines", availableMedicines);
 						}
+						patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+						request.setAttribute("patient", patient);
 					} else {
 						request.setAttribute("actionType", "error");
 					}
@@ -109,7 +111,6 @@ public class PharmacistController extends HttpServlet {
 					if (patient != null) {
 						medicines_issued = PharmacistServices.getAllMedicinesIssued(patient_id);
 						request.setAttribute("actionType", "show");
-						request.setAttribute("patient", patient);
 						request.setAttribute("medicines", medicines_issued);
 						HttpSession session = request.getSession();
 						if (session.getAttribute("availableMedicines") == null) {
@@ -117,6 +118,8 @@ public class PharmacistController extends HttpServlet {
 							availableMedicines = PharmacistServices.getAllMedicines();
 							session.setAttribute("availableMedicines", availableMedicines);
 						}
+						patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+						request.setAttribute("patient", patient);
 						rd = request.getRequestDispatcher("pharmacistJSPs/issueMedicines.jsp");
 						rd.forward(request, response);
 					}

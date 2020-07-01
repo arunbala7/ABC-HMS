@@ -134,7 +134,6 @@ $(document).ready(function() {
 			e.preventDefault();
 			patient_id=$("#id").val();
 			var obj={actionType,action,patient_id };		
-			//alert(JSON.stringify(obj));
 			swal({
 				  title: "Confirm Delete",
 				  text: "Once deleted, you will not be able to recover!",

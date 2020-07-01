@@ -11,6 +11,7 @@ import com.abc.beans.Patient;
 import com.abc.beans.Test;
 import com.abc.beans.User;
 import com.abc.utils.DBConnection;
+import com.abc.utils.DateFormat;
 import com.mysql.jdbc.Connection;
 
 public class HospitalDAO {
@@ -133,6 +134,7 @@ public class HospitalDAO {
 			patient.setPatient_name(rs.getString(3));
 			patient.setPatient_age(rs.getInt(4));
 			patient.setPatient_date_of_admission(rs.getString(5));
+			patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
 			patient.setType_of_room(rs.getString(6));
 			patient.setAddress(rs.getString(7));
 			patient.setCity(rs.getString(8));

@@ -65,8 +65,7 @@ $(document).ready(function() {
 			state = $("#state").val();			
 			type_of_room = $("#type_of_room").val();			
 			action = $("#action").val();			
-			var obj={patient_name,patient_SSN,patient_age,address,city,state,type_of_room,action};
-			//alert(JSON.stringify(obj));			
+			var obj={patient_name,patient_SSN,patient_age,address,city,state,type_of_room,action};			
 			$.ajax({
 	            url:'AdminDeskController',
 	            data:obj,

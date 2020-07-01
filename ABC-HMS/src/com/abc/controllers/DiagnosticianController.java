@@ -15,6 +15,7 @@ import com.abc.beans.Patient;
 import com.abc.beans.Test;
 import com.abc.beans.User;
 import com.abc.services.DiagnosticianService;
+import com.abc.utils.DateFormat;
 
 @WebServlet("/DiagnosticianController")
 public class DiagnosticianController extends HttpServlet {
@@ -72,7 +73,6 @@ public class DiagnosticianController extends HttpServlet {
 					if (patient != null) {
 						tests = DiagnosticianService.getAllTests(patient_id);
 						request.setAttribute("actionType", "show");
-						request.setAttribute("patient", patient);
 						request.setAttribute("tests", tests);
 						HttpSession session = request.getSession();
 						if (session.getAttribute("availableTests") == null) {
@@ -80,6 +80,8 @@ public class DiagnosticianController extends HttpServlet {
 							availableTests = DiagnosticianService.getAllAvailableTests();
 							session.setAttribute("availableTests", availableTests);
 						}
+						patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+						request.setAttribute("patient", patient);
 					} else {
 						request.setAttribute("actionType", "error");
 					}
@@ -104,7 +106,6 @@ public class DiagnosticianController extends HttpServlet {
 					if (patient != null) {
 						tests = DiagnosticianService.getAllTests(patient_id);
 						request.setAttribute("actionType", "show");
-						request.setAttribute("patient", patient);
 						request.setAttribute("tests", tests);
 						HttpSession session = request.getSession();
 						if (session.getAttribute("availableTests") == null) {
@@ -112,6 +113,8 @@ public class DiagnosticianController extends HttpServlet {
 							availableTests = DiagnosticianService.getAllAvailableTests();
 							session.setAttribute("availableTests", availableTests);
 						}
+						patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+						request.setAttribute("patient", patient);
 						rd = request.getRequestDispatcher("diagnosticianJSPs/addDiagnostic.jsp");
 						rd.forward(request, response);
 					}
