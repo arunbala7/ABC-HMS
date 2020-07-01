@@ -247,18 +247,25 @@
 						<strong>Grand Total: Rs.${grandTotal}</strong>
 					</div>
 					<div class="col-md-12  text-center p-t-20 p-b-20">
-						<button class="btn btn-primary active" id="cancel">Back</button>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<c:if test="${patient.getStatus() == 'ACTIVE'}">
-							<button type="submit" form="patientForm"
-								class="btn btn-primary active" id="confirm">Confirm</button>
-						</c:if>
 						<c:if test="${patient.getStatus() != 'ACTIVE'}">
 							<div class="d-flex justify-content-center after"
 								style="font-size: 25px;">
 								<strong>***Patient Discharged***</strong>
 							</div>
+							<div class="p-t-10 p-b-0">
+								<button class="btn btn-primary active" id="cancel">Back</button>
+							</div>
 						</c:if>
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:if test="${patient.getStatus() == 'ACTIVE'}">
+							<div class="col-md-12 text-center ">
+								<button class="btn btn-primary active" id="cancel">Back</button>
+								<button type="submit" form="patientForm"
+									class="btn btn-primary active" id="confirm">Confirm</button>
+							</div>
+						</c:if>
+
 					</div>
 					<form autocomplete="off" class="login100-form validate-form before"
 						id="patientForm" action="AdminDeskController" method="post">

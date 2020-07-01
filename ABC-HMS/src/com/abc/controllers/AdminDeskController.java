@@ -139,7 +139,8 @@ public class AdminDeskController extends HttpServlet {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					patient = AdminDeskService.getPatient(patient_id);
 					if (patient != null) {
-						patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+						patient.setPatient_date_of_admission(
+								DateFormat.formatedDate(patient.getPatient_date_of_admission()));
 						response.setContentType("application/json");
 						String personJson = this.gson.toJson(patient);
 						response.getWriter().print(personJson);
@@ -180,7 +181,8 @@ public class AdminDeskController extends HttpServlet {
 					Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 					patient = AdminDeskService.getPatient(patient_id);
 					if (patient != null) {
-						patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+						patient.setPatient_date_of_admission(
+								DateFormat.formatedDate(patient.getPatient_date_of_admission()));
 						response.setContentType("application/json");
 						String personJson = this.gson.toJson(patient);
 						response.getWriter().print(personJson);
@@ -224,7 +226,8 @@ public class AdminDeskController extends HttpServlet {
 				Long patient_id = Long.parseLong(request.getParameter("patient_id"));
 				patient = AdminDeskService.getPatient(patient_id);
 				if (patient != null) {
-					patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+					patient.setPatient_date_of_admission(
+							DateFormat.formatedDate(patient.getPatient_date_of_admission()));
 					response.setContentType("application/json");
 					String personJson = this.gson.toJson(patient);
 					response.getWriter().print(personJson);
@@ -262,7 +265,8 @@ public class AdminDeskController extends HttpServlet {
 						request.setAttribute("medicineAmount", medicineAmount);
 						request.setAttribute("testAmount", testAmount);
 						request.setAttribute("grandTotal", grandTotal);
-						patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+						patient.setPatient_date_of_admission(
+								DateFormat.formatedDate(patient.getPatient_date_of_admission()));
 						request.setAttribute("patient", patient);
 						request.setAttribute("todayDate", DateFormat.formatedDate(DateFormat.today()));
 					} else {
@@ -295,7 +299,8 @@ public class AdminDeskController extends HttpServlet {
 							request.setAttribute("medicineAmount", medicineAmount);
 							request.setAttribute("testAmount", testAmount);
 							request.setAttribute("grandTotal", grandTotal);
-							patient.setPatient_date_of_admission(DateFormat.formatedDate(patient.getPatient_date_of_admission()));
+							patient.setPatient_date_of_admission(
+									DateFormat.formatedDate(patient.getPatient_date_of_admission()));
 							request.setAttribute("patient", patient);
 							request.setAttribute("todayDate", DateFormat.formatedDate(DateFormat.today()));
 						} else {
