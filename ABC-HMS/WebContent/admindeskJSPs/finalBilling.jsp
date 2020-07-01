@@ -91,6 +91,10 @@
 		function validate(input) {
 			if ($(input).val().trim() == '')
 				return false;
+			switch ($(input).attr("name")) {
+		    case "patient_id":
+		      return validate_patient_id($(input).val().trim());
+		  }
 		}
 		function showValidate(input) {
 			var thisAlert = $(input).parent();

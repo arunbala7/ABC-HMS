@@ -37,7 +37,7 @@ $(document).ready(function() {
 		//   [ Validate ]
 		var input = $('.validate-input .input100');
 
-		$('.validate-form').on('submit', function(e) {
+		$('#submitForm').click( function() {
 			var check = true;
 
 			for (var i = 0; i < input.length; i++) {
@@ -56,7 +56,6 @@ $(document).ready(function() {
 			var state = "";
 			var type_of_room="";
 			var action="";
-			e.preventDefault();
 			patient_name = $("#patient_name").val();
 			patient_SSN = $("#patient_SSN").val();
 			patient_age = $("#patient_age").val();
@@ -114,18 +113,22 @@ $(document).ready(function() {
 
 		function validate(input) {
 			if ($(input).val().trim() == '')
-				return false;
+				return false;			
 			switch ($(input).attr("name")) {
-		    case "name":
+		    case "patient_name":
 		      return validate_name($(input).val().trim());
-		    case "ssn":
+		    case "patient_SSN":
 		      return validate_ssno($(input).val().trim());
-		    case "dob":
-		      return validate_dob($(input).val().trim());
+		    case "patient_age":
+		      return validate_age($(input).val().trim());
 		    case "address":
 		      return validate_address($(input).val().trim());
-		    default:
-			  return;
+		    case "city":
+		      return validate_city($(input).val().trim());
+		    case "state":
+		      return validate_state($(input).val().trim());
+		    case "patient_id":
+		      return validate_patient_id($(input).val().trim());
 		  }
 		}
 
@@ -217,12 +220,13 @@ $(document).ready(function() {
 				</div>
 
 				<input type="hidden" id="action" name="action" value="createPatient" />
-				<div class="col-md-12 text-center">
-					<button type="reset" class="btn btn-primary active" id="reset">Reset</button>
-					&ensp; <input type="submit" class="btn btn-primary active"
-						id="submitForm" value="Create" />
-				</div>
 			</form>
+			<div class="col-md-12 text-center">
+				<button type="reset" form="patientForm"
+					class="btn btn-primary active" id="reset">Reset</button>
+				&ensp;
+				<button class="btn btn-primary active" id="submitForm">Create</button>
+			</div>
 		</div>
 	</div>
 

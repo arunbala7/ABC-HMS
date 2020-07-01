@@ -139,7 +139,6 @@ $(document).ready(function() {
 			state = $("#state").val();
 			patient_id=$("#id").val();
 			var obj={patient_name,patient_age,type_of_room,address,city,state,actionType,action,patient_id };		
-			//alert(JSON.stringify(obj));
 			$.ajax({
 	            url:'AdminDeskController',
 	            data:obj,
@@ -188,7 +187,23 @@ $(document).ready(function() {
 
 		function validate(input) {
 			if ($(input).val().trim() == '')
-				return false;			
+				return false;	
+			switch ($(input).attr("name")) {
+		    case "patient_name":
+		      return validate_name($(input).val().trim());
+		    case "patient_SSN":
+		      return validate_ssno($(input).val().trim());
+		    case "patient_age":
+		      return validate_age($(input).val().trim());
+		    case "address":
+		      return validate_address($(input).val().trim());
+		    case "city":
+		      return validate_city($(input).val().trim());
+		    case "state":
+		      return validate_state($(input).val().trim());
+		    case "patient_id":
+		      return validate_patient_id($(input).val().trim());
+		  }
 		}
 
 		function showValidate(input) {
