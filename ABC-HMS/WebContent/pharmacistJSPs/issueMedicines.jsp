@@ -103,6 +103,19 @@
 			}
 			return check;
 		});
+		
+		
+		$('#patientForm').on('submit', function(e) {
+			var check = true;
+
+			for (var i = 0; i < input.length; i++) {
+				if (validate($('#quantity')) == false) {
+					showValidate($('#quantity'));
+					check = false;
+				}
+			}
+			return check;
+		});
 
 		$('.validate-form .input100').each(function() {
 			$(this).focus(function() {
@@ -271,10 +284,14 @@
 								</select>
 
 							</div>
-							<div class="col-sm-3 ">
-								<span class="label-input100">Quantity</span> <input
-									class="input100 form-control" type="text" name="quantity"
-									placeholder="Enter the Quantity..." value="1" />
+							<div class="col-sm-3">
+								<div class=" validate-input m-b-23"
+									data-validate="Enter a Valid Quantity">
+									<span class="label-input100">Quantity</span> <input
+										class="input100 form-control" type="text" name="quantity"
+										maxLength="5" id="quantity"
+										placeholder="Enter the Quantity..." value="1" />
+								</div>
 							</div>
 						</div>
 
